@@ -4,10 +4,7 @@ import db from "../../db";
 
 export default {
   Mutation: {
-    createAccount: async (
-      _,
-      { firstName, lastName, userName, email, password }
-    ) => {
+    createAccount: async (_, { userName, email, password }) => {
       try {
         const existingUser = await db.user.findFirst({
           where: {
@@ -30,8 +27,6 @@ export default {
           data: {
             userName,
             email,
-            firstName,
-            lastName,
             password: uglyPassword,
           },
         });
