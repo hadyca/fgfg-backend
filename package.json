@@ -23,6 +23,7 @@
     "express": "^4.19.2",
     "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6",
+    "jsonwebtoken": "^9.0.2",
     "prisma": "^5.18.0"
   },
   "devDependencies": {

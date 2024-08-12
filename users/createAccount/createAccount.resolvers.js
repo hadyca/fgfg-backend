@@ -1,16 +1,17 @@
 require("dotenv").config();
 import bcrypt from "bcrypt";
 import db from "../../db";
+import jwt from "jsonwebtoken";
 
 export default {
   Mutation: {
-    createAccount: async (_, { userName, email, password }) => {
+    createAccount: async (_, { username, email, password }) => {
       try {
         const existingUser = await db.user.findFirst({
           where: {
             OR: [
               {
-                userName,
+                username,
               },
               {
                 email,
@@ -19,19 +20,28 @@ export default {
           },
         });
         if (existingUser) {
-          throw new Error("이미 계정이 있습니다.");
+          return {
+            ok: false,
+            error: "이미 있는 계정입니다.",
+          };
         }
         const uglyPassword = await bcrypt.hash(password, 10);
 
-        return db.user.create({
+        const user = await db.user.create({
           data: {
-            userName,
+            username,
             email,
             password: uglyPassword,
           },
         });
-      } catch (e) {
-        return e;
+        const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET_KEY);
+
+        return {
+          ok: true,
+          token,
+        };
+      } catch (error) {
+        return error;
       }
     },
   },

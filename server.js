@@ -1,17 +1,23 @@
+require("dotenv").config();
 import { ApolloServer } from "@apollo/server";
 import { typeDefs, resolvers } from "./schema";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { getUser } from "./users/users.utils";
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true,
-  playground: true,
 });
 
 const startServer = async () => {
   try {
-    const { url } = await startStandaloneServer(server);
+    const { url } = await startStandaloneServer(server, {
+      context: async ({ req }) => {
+        return {
+          loggedInUser: await getUser(req.headers.token),
+        };
+      },
+    });
     // await server.start();
     console.log(`🚀 Server is running ${url}`);
   } catch (error) {

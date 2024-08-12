@@ -1,10 +1,17 @@
 import { gql } from "graphql-tag";
 
 export default gql`
-  type Mutation {
-    createAccount(userName: String!, email: String!, password: String!): User
+  type createAccountResult {
+    ok: Boolean!
+    token: String!
+    error: String
   }
-  type Query {
-    seeProfile(userName: String!): User
+
+  type Mutation {
+    createAccount(
+      username: String!
+      email: String!
+      password: String!
+    ): createAccountResult!
   }
 `;

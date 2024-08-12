@@ -9,9 +9,20 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
-  userName  String   @unique
+  username  String   @unique
   email     String   @unique
+  avatar    String?
   password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  guide     Guide?
+}
+
+model Guide {
+  id        Int      @id @default(autoincrement())
+  fullname  String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int      @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
