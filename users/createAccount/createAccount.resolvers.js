@@ -7,24 +7,24 @@ export default {
   Mutation: {
     createAccount: async (_, { username, email, password }) => {
       try {
-        const existingUser = await db.user.findFirst({
-          where: {
-            OR: [
-              {
-                username,
-              },
-              {
-                email,
-              },
-            ],
-          },
-        });
-        if (existingUser) {
-          return {
-            ok: false,
-            error: "이미 있는 계정입니다.",
-          };
-        }
+        // const existingUser = await db.user.findFirst({
+        //   where: {
+        //     OR: [
+        //       {
+        //         username,
+        //       },
+        //       {
+        //         email,
+        //       },
+        //     ],
+        //   },
+        // });
+        // if (existingUser) {
+        //   return {
+        //     ok: false,
+        //     error: "이미 있는 계정입니다.",
+        //   };
+        // }
         const uglyPassword = await bcrypt.hash(password, 10);
 
         const user = await db.user.create({
