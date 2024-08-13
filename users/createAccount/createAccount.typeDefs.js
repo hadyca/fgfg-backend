@@ -3,7 +3,8 @@ import { gql } from "graphql-tag";
 export default gql`
   type createAccountResult {
     ok: Boolean!
-    token: String!
+    token: String
+    id: Int
     error: String
   }
 
