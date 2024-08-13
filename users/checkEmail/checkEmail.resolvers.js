@@ -1,7 +1,7 @@
 import db from "../../db";
 
 export default {
-  Mutation: {
+  Query: {
     checkEmail: async (_, { email }) => {
       try {
         const user = await db.user.findUnique({

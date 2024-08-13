@@ -1,7 +1,7 @@
 import { gql } from "graphql-tag";
 
 export default gql`
-  type Mutation {
+  type Query {
     checkEmail(email: String!): MutationResponse!
   }
 `;
