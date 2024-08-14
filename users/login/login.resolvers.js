@@ -24,7 +24,6 @@ export default {
 
         return {
           ok: true,
-          id: user.id,
           token,
         };
       } catch (error) {

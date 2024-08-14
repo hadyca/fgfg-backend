@@ -11,6 +11,7 @@ const server = new ApolloServer({
 
 const startServer = async () => {
   try {
+    console.log(`🚀 Server is running ${url}`);
     const { url } = await startStandaloneServer(server, {
       context: async ({ req }) => {
         return {
@@ -18,6 +19,7 @@ const startServer = async () => {
         };
       },
     });
+
     // await server.start();
     console.log(`🚀 Server is running ${url}`);
   } catch (error) {
