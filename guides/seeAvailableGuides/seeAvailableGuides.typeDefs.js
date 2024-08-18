@@ -2,6 +2,6 @@ import { gql } from "graphql-tag";
 
 export default gql`
   type Query {
-    checkEmail(email: String!): MutationResult!
+    seeAvailableGuides(startTime: String!, endTime: String!): [Guide]
   }
 `;

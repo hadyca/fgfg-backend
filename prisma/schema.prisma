@@ -8,21 +8,36 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
-  avatar    String?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  guide     Guide?
+  id           Int           @id @default(autoincrement())
+  username     String        @unique
+  email        String        @unique
+  avatar       String?
+  password     String
+  guide        Guide?
+  Reservations Reservation[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 model Guide {
-  id        Int      @id @default(autoincrement())
-  fullname  String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int      @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int           @id @default(autoincrement())
+  fullname     String        @unique
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int           @unique
+  Reservations Reservation[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Reservation {
+  id           Int      @id @default(autoincrement())
+  guide        Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
+  guideId      Int
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int
+  startTime    DateTime
+  endTime      DateTime
+  guideConfirm Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt()
 }

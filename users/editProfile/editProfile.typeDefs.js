@@ -6,6 +6,6 @@ export default gql`
       username: String
       avatar: String
       password: String
-    ): MutationResponse!
+    ): MutationResult!
   }
 `;

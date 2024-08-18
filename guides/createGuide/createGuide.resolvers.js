@@ -1,5 +1,5 @@
 import db from "../../db";
-import { protectedResolver } from "../users.utils";
+import { protectedResolver } from "../../users/users.utils";
 
 export default {
   Mutation: {

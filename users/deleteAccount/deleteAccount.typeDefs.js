@@ -2,6 +2,6 @@ import { gql } from "graphql-tag";
 
 export default gql`
   type Mutation {
-    deleteAccount(userId: Int!): MutationResponse!
+    deleteAccount(userId: Int!): MutationResult!
   }
 `;

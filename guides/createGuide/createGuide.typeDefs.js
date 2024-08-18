@@ -2,6 +2,6 @@ import { gql } from "graphql-tag";
 
 export default gql`
   type Mutation {
-    createGuide(fullname: String!): MutationResponse!
+    createGuide(fullname: String!): MutationResult!
   }
 `;

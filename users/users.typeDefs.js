@@ -6,13 +6,9 @@ export default gql`
     username: String!
     avatar: String
     email: String!
-    createdAt: String!
-    updatedAt: String!
-  }
-
-  type Guide {
-    id: String!
-    fullname: String!
+    guide: Guide
+    isMe: Boolean!
+    isGuide: Boolean!
     createdAt: String!
     updatedAt: String!
   }
