@@ -7,6 +7,15 @@ export default {
       { startTime: newStartTime, endTime: newEndTime }
     ) => {
       try {
+        if (!newStartTime || !newEndTime) {
+          const guides = await db.guide.findMany({
+            orderBy: {
+              createdAt: "desc",
+            },
+          });
+          return guides;
+        }
+
         const existingReservation = await db.reservation.findMany({
           where: {
             OR: [
