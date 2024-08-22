@@ -6,7 +6,13 @@ export default {
   Mutation: {
     login: async (_, { email, password }) => {
       try {
-        const user = await db.user.findUnique({ where: { email } });
+        const user = await db.user.findUnique({
+          where: { email },
+          include: {
+            guide: true,
+          },
+        });
+
         if (!user) {
           return {
             ok: false,
@@ -20,11 +26,13 @@ export default {
             error: "비밀번호가 틀렸습니다.",
           };
         }
+        const isGuide = Boolean(user.guide);
         const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET_KEY);
 
         return {
           ok: true,
           token,
+          isGuide,
         };
       } catch (error) {
         return error;

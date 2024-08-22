@@ -31,6 +31,7 @@ export default {
 
           return {
             ok: true,
+            isGuide: true,
           };
         } catch (error) {
           return error;
