@@ -12,6 +12,7 @@ export default {
       const exist = await db.guide.findUnique({
         where: {
           userId: id,
+          isApproved: true,
         },
       });
       return Boolean(exist);
