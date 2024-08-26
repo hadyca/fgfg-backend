@@ -21,7 +21,12 @@ model User {
 
 model Guide {
   id           Int           @id @default(autoincrement())
-  fullname     String        @unique
+  fullname     String
+  birthdate    String
+  address      String
+  phone        String
+  photo        String
+  selfIntro    String
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int           @unique
   Reservations Reservation[]

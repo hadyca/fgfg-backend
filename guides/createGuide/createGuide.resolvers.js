@@ -4,7 +4,11 @@ import { protectedResolver } from "../../users/users.utils";
 export default {
   Mutation: {
     createGuide: protectedResolver(
-      async (_, { fullname }, { loggedInUser }) => {
+      async (
+        _,
+        { fullname, birthdate, address, phone, photo, selfIntro },
+        { loggedInUser }
+      ) => {
         try {
           const existingUser = await db.guide.findUnique({
             where: {
@@ -14,13 +18,18 @@ export default {
           if (existingUser) {
             return {
               ok: false,
-              error: "이미 가입된 가이드 입니다.",
+              error: "이미 가입된 유저 입니다.",
             };
           }
 
           await db.guide.create({
             data: {
               fullname,
+              birthdate,
+              address,
+              phone,
+              photo,
+              selfIntro,
               user: {
                 connect: {
                   id: loggedInUser.id,
@@ -31,7 +40,6 @@ export default {
 
           return {
             ok: true,
-            isGuide: true,
           };
         } catch (error) {
           return error;

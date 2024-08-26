@@ -4,10 +4,16 @@ export default gql`
   type createGuideResult {
     ok: Boolean!
     error: String
-    isGuide: Boolean!
   }
 
   type Mutation {
-    createGuide(fullname: String!): createGuideResult!
+    createGuide(
+      fullname: String!
+      birthdate: String!
+      address: String!
+      phone: String!
+      photo: String!
+      selfIntro: String!
+    ): createGuideResult!
   }
 `;
