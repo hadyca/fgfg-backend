@@ -27,6 +27,7 @@ model Guide {
   phone        String
   photo        String
   selfIntro    String
+  language     String? //추 후 postresql 변경 후, Json으로 교체
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int           @unique
   Reservations Reservation[]

@@ -6,6 +6,12 @@ export default gql`
     error: String
   }
 
+  input LanguageInput {
+    id: Int!
+    language: String!
+    level: String!
+  }
+
   type Mutation {
     createGuide(
       fullname: String!
@@ -14,6 +20,7 @@ export default gql`
       phone: String!
       photo: String!
       selfIntro: String!
+      language: [LanguageInput!]
     ): createGuideResult!
   }
 `;

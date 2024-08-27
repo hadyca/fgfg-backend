@@ -6,7 +6,7 @@ export default {
     createGuide: protectedResolver(
       async (
         _,
-        { fullname, birthdate, address, phone, photo, selfIntro },
+        { fullname, birthdate, address, phone, photo, selfIntro, language },
         { loggedInUser }
       ) => {
         try {
@@ -30,6 +30,7 @@ export default {
               phone,
               photo,
               selfIntro,
+              language: JSON.stringify(language),
               user: {
                 connect: {
                   id: loggedInUser.id,
