@@ -3,14 +3,24 @@ import { protectedResolver } from "../../users/users.utils";
 
 export default {
   Mutation: {
-    deleteGuide: protectedResolver(async (_, __, { loggedInUser }) => {
+    deleteGuideProfile: protectedResolver(async (_, __, { loggedInUser }) => {
       try {
-        await db.guide.delete({
+        const guide = db.guide.findUnique({
           where: {
             userId: loggedInUser.id,
           },
         });
 
+        if (!guide) {
+          ok: false;
+          error: "가이드 계정이 아닙니다.";
+        }
+
+        await db.guideProfile.delete({
+          where: {
+            guideId: guide.id,
+          },
+        });
         return {
           ok: true,
         };

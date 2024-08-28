@@ -11,6 +11,9 @@ export default {
 
         if (!originalStartTime || !newEndTime) {
           const guides = await db.guide.findMany({
+            where: {
+              isApproved: true,
+            },
             orderBy: {
               createdAt: "desc",
             },
@@ -71,7 +74,6 @@ export default {
 
         return guides;
       } catch (error) {
-        console.error("Error in seeAvailableGuides:", error);
         return error;
       }
     },

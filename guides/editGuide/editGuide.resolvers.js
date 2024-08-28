@@ -4,19 +4,32 @@ import { protectedResolver } from "../../users/users.utils";
 export default {
   Mutation: {
     editGuide: protectedResolver(
-      async (_, { fullname: newFullname }, { loggedInUser }) => {
+      async (
+        _,
+        { fullname, birthdate, address, phone, photo, selfIntro, language },
+        { loggedInUser }
+      ) => {
         try {
           await db.guide.update({
             where: { userId: loggedInUser.id },
             data: {
-              ...(newFullname && { fullname: newFullname }),
+              fullname,
+              birthdate,
+              address,
+              phone,
+              photo,
+              selfIntro,
+              language,
             },
           });
           return {
             ok: true,
           };
         } catch (error) {
-          return error;
+          return {
+            ok: false,
+            error: "오류가 발생했습니다.",
+          };
         }
       }
     ),

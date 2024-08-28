@@ -1,11 +1,6 @@
 import { gql } from "graphql-tag";
 
 export default gql`
-  type createGuideResult {
-    ok: Boolean!
-    error: String
-  }
-
   input LanguageInput {
     id: Int!
     language: String!
@@ -21,6 +16,6 @@ export default gql`
       photo: String!
       selfIntro: String!
       language: [LanguageInput!]
-    ): createGuideResult!
+    ): MutationResult!
   }
 `;

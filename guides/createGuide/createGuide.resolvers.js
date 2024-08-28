@@ -43,7 +43,10 @@ export default {
             ok: true,
           };
         } catch (error) {
-          return error;
+          return {
+            ok: false,
+            error: "오류가 발생했습니다.",
+          };
         }
       }
     ),

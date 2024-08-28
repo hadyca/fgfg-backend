@@ -4,7 +4,7 @@ import { protectedResolver } from "../users.utils";
 
 export default {
   Mutation: {
-    editProfile: protectedResolver(
+    editUserProfile: protectedResolver(
       async (
         _,
         { username: newUsername, avatar, password: newPassword },

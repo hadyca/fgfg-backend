@@ -28,12 +28,28 @@ model Guide {
   photo        String
   selfIntro    String
   language     String? //추 후 postresql 변경 후, Json으로 교체
+  isApproved   Boolean       @default(false)
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int           @unique
   Reservations Reservation[]
-  isApproved   Boolean       @default(false)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+  guideProfile GuideProfile?
+}
+
+model GuideProfile {
+  id          Int      @id @default(autoincrement())
+  fullname    String
+  age         String
+  guide       Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
+  guideId     Int      @unique
+  guidePhotos File[]
+  personality String
+  height      String
+  guideIntro  String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Reservation {
@@ -47,4 +63,13 @@ model Reservation {
   guideConfirm Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt()
+}
+
+model File {
+  id             Int          @id @default(autoincrement())
+  fileUrl        String
+  guideProfile   GuideProfile @relation(fields: [guideProfileId], references: [id], onDelete: Cascade)
+  guideProfileId Int
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }

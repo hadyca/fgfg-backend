@@ -5,6 +5,9 @@ export default {
     seeAllGuides: async () => {
       try {
         const guides = await db.guide.findMany({
+          where: {
+            isApproved: true,
+          },
           orderBy: {
             createdAt: "desc",
           },

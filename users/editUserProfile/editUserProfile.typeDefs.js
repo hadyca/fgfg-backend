@@ -2,7 +2,7 @@ import { gql } from "graphql-tag";
 
 export default gql`
   type Mutation {
-    editProfile(
+    editUserProfile(
       username: String
       avatar: String
       password: String

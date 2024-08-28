@@ -5,7 +5,7 @@ export default gql`
     ok: Boolean!
     token: String
     error: String
-    isGuide: Boolean!
+    isGuide: Boolean
   }
 
   type Mutation {
