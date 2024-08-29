@@ -8,7 +8,6 @@ export default gql`
     email: String!
     guide: Guide
     isMe: Boolean!
-    isGuide: Boolean
     createdAt: String!
     updatedAt: String!
   }

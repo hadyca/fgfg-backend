@@ -3,8 +3,8 @@ import { gql } from "graphql-tag";
 export default gql`
   type createAccountResult {
     ok: Boolean!
-    token: String
     error: String
+    token: String
   }
 
   type Mutation {

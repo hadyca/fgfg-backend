@@ -3,9 +3,9 @@ import { gql } from "graphql-tag";
 export default gql`
   type loginResult {
     ok: Boolean!
-    token: String
     error: String
-    isGuide: Boolean
+    token: String
+    guideId: Int
   }
 
   type Mutation {

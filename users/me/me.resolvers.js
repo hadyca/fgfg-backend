@@ -9,7 +9,11 @@ export default {
           where: {
             id: loggedInUser.id,
           },
+          include: {
+            guide: true,
+          },
         });
+
         if (!user) {
           throw new Error("본인 계정이 아닙니다.");
         } else {

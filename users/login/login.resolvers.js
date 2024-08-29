@@ -26,12 +26,21 @@ export default {
             error: "비밀번호가 틀렸습니다.",
           };
         }
-        const isGuide = Boolean(user?.guide?.isApproved);
+
+        //승인된 가이드만 guideId 발급
+        const guide = await db.guide.findUnique({
+          where: {
+            userId: user.id,
+            isApproved: true,
+          },
+        });
+
         const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET_KEY);
+
         return {
           ok: true,
           token,
-          isGuide,
+          ...(guide && { guideId: guide.id }), // guide가 존재하면 guideId를 리턴 객체에 추가
         };
       } catch (error) {
         return error;
