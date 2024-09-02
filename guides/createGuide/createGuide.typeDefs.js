@@ -11,6 +11,7 @@ export default gql`
     createGuide(
       fullname: String!
       birthdate: String!
+      height: String!
       address: String!
       phone: String!
       photo: String!

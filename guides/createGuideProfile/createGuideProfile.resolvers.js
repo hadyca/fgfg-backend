@@ -1,15 +1,10 @@
 import db from "../../db";
 import { protectedResolver } from "../../users/users.utils";
-import { calculateAge } from "../../utils";
 
 export default {
   Mutation: {
     createGuideProfile: protectedResolver(
-      async (
-        _,
-        { photos, personality, height, guideIntro },
-        { loggedInUser }
-      ) => {
+      async (_, { photos, personality, guideIntro }, { loggedInUser }) => {
         try {
           const guide = await db.guide.findUnique({
             where: {
@@ -23,14 +18,9 @@ export default {
             };
           }
 
-          const age = calculateAge(guide.birthdate);
-
           const newGuideProfile = await db.guideProfile.create({
             data: {
-              fullname: guide.fullname,
-              age,
               personality,
-              height,
               guideIntro,
               guide: {
                 connect: {

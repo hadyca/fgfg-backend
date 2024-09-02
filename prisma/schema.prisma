@@ -23,6 +23,7 @@ model Guide {
   id           Int           @id @default(autoincrement())
   fullname     String
   birthdate    String
+  height       String
   address      String
   phone        String
   photo        String

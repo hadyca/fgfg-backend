@@ -6,7 +6,16 @@ export default {
     createGuide: protectedResolver(
       async (
         _,
-        { fullname, birthdate, address, phone, photo, selfIntro, language },
+        {
+          fullname,
+          birthdate,
+          height,
+          address,
+          phone,
+          photo,
+          selfIntro,
+          language,
+        },
         { loggedInUser }
       ) => {
         try {
@@ -26,6 +35,7 @@ export default {
             data: {
               fullname,
               birthdate,
+              height,
               address,
               phone,
               photo,
