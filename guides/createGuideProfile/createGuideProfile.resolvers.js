@@ -30,10 +30,10 @@ export default {
             },
           });
 
-          for (let value of photos) {
+          for (let photo of photos) {
             await db.file.create({
               data: {
-                fileUrl: value.url,
+                fileUrl: JSON.stringify(photo.url),
                 guideProfile: {
                   connect: {
                     id: newGuideProfile.id,
@@ -42,6 +42,7 @@ export default {
               },
             });
           }
+
           return {
             ok: true,
           };
