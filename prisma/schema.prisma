@@ -32,7 +32,7 @@ model Guide {
   isApproved   Boolean       @default(false)
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int           @unique
-  Reservations Reservation[]
+  reservations Reservation[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   guideProfile GuideProfile?
@@ -40,13 +40,10 @@ model Guide {
 
 model GuideProfile {
   id          Int      @id @default(autoincrement())
-  fullname    String
-  age         String
   guide       Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
   guideId     Int      @unique
-  guidePhotos File[]
+  photos      File[]
   personality String
-  height      String
   guideIntro  String
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())

@@ -10,7 +10,11 @@ export default {
             id: loggedInUser.id,
           },
           include: {
-            guide: true,
+            guide: {
+              include: {
+                guideProfile: true,
+              },
+            },
           },
         });
 

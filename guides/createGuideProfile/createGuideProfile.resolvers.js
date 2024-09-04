@@ -33,7 +33,7 @@ export default {
           for (let photo of photos) {
             await db.file.create({
               data: {
-                fileUrl: JSON.stringify(photo.url),
+                fileUrl: photo.url,
                 guideProfile: {
                   connect: {
                     id: newGuideProfile.id,

@@ -4,11 +4,7 @@ import { protectedResolver } from "../../users/users.utils";
 export default {
   Mutation: {
     editGuideProfile: protectedResolver(
-      async (
-        _,
-        { photos, personality, height, guideIntro },
-        { loggedInUser }
-      ) => {
+      async (_, { photos, personality, guideIntro }, { loggedInUser }) => {
         // to-be: 프론트단에서 사진 변경 시, 클라우드 클레어 이미지 삭제 해야함
         try {
           const guide = await db.guide.findUnique({
@@ -58,10 +54,10 @@ export default {
             });
           }
           // 추가할 사진 생성
-          for (let value of photosToAdd) {
+          for (let newPhoto of photosToAdd) {
             await db.file.create({
               data: {
-                fileUrl: value.url,
+                fileUrl: newPhoto.url,
                 guideProfile: {
                   connect: {
                     id: newGuideProfile.id,

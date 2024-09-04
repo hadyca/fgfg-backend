@@ -5,7 +5,6 @@ export default gql`
     editGuideProfile(
       photos: [PhotosInput!]!
       personality: String!
-      height: String!
       guideIntro: String!
     ): MutationResult!
   }

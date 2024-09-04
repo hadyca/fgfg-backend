@@ -12,17 +12,15 @@ export default gql`
     language: String!
     isApproved: Boolean!
     user: User!
-    Reservations: [Reservation]
+    reservations: [Reservation]
+    guideProfile: GuideProfile
   }
 
   type GuideProfile {
     id: String!
-    fullname: String!
-    age: String!
     guide: Guide!
-    guidePhotos: [File]
+    photos: [File]
     personality: String!
-    height: String!
     guideIntro: String!
     isActive: Boolean!
   }
