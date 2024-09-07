@@ -14,9 +14,10 @@ export default {
             where: {
               isApproved: true,
             },
-            orderBy: {
-              createdAt: "desc",
-            },
+            orderBy: [
+              { isActive: "desc" }, // isActive가 true인 가이드를 우선 정렬
+              { createdAt: "desc" }, // 생성 날짜 기준으로 정렬
+            ],
           });
           return guides;
         }

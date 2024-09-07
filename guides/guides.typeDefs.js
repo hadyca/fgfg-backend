@@ -2,31 +2,27 @@ import { gql } from "graphql-tag";
 
 export default gql`
   type Guide {
-    id: String!
+    id: Int!
     fullname: String!
     birthdate: String!
     address: String!
     phone: String!
-    photo: String!
+    resumePhoto: String!
+    guidePhotos: [File]
+    mainGuidePhoto: File
+    personality: String
+    guideIntro: String
+    isActive: Boolean
     selfIntro: String!
     language: String!
     isApproved: Boolean!
     user: User!
     reservations: [Reservation]
-    guideProfile: GuideProfile
-  }
-
-  type GuideProfile {
-    id: String!
-    guide: Guide!
-    photos: [File]
-    personality: String!
-    guideIntro: String!
-    isActive: Boolean!
   }
 
   type File {
     id: Int!
     fileUrl: String!
+    fileUrlOrder: String!
   }
 `;

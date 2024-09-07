@@ -7,9 +7,12 @@ export default gql`
       birthdate: String!
       address: String!
       phone: String!
-      photo: String!
+      resumePhoto: String!
       selfIntro: String!
       language: [LanguageInput!]
+      guidePhotos: [GuidePhotosInput]!
+      personality: String!
+      guideIntro: String!
     ): MutationResult!
   }
 `;

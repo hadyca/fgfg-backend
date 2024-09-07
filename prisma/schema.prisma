@@ -26,28 +26,19 @@ model Guide {
   height       String
   address      String
   phone        String
-  photo        String
+  resumePhoto  String
+  guidePhotos  File[]
   selfIntro    String
   language     String? //추 후 postresql 변경 후, Json으로 교체
-  isApproved   Boolean       @default(false)
+  personality  String?
+  guideIntro   String?
+  isActive     Boolean       @default(true) //가이드용
+  isApproved   Boolean       @default(false) //운영자용
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int           @unique
   reservations Reservation[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  guideProfile GuideProfile?
-}
-
-model GuideProfile {
-  id          Int      @id @default(autoincrement())
-  guide       Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
-  guideId     Int      @unique
-  photos      File[]
-  personality String
-  guideIntro  String
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
 
 model Reservation {
@@ -64,10 +55,11 @@ model Reservation {
 }
 
 model File {
-  id             Int          @id @default(autoincrement())
-  fileUrl        String
-  guideProfile   GuideProfile @relation(fields: [guideProfileId], references: [id], onDelete: Cascade)
-  guideProfileId Int
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  id           Int      @id @default(autoincrement())
+  fileUrl      String
+  fileUrlOrder Int
+  guide        Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
+  guideId      Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

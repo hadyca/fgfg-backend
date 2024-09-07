@@ -14,7 +14,7 @@ export default gql`
       height: String!
       address: String!
       phone: String!
-      photo: String!
+      resumePhoto: String!
       selfIntro: String!
       language: [LanguageInput!]
     ): MutationResult!

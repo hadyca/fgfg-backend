@@ -4,7 +4,7 @@ import { protectedResolver } from "../../users/users.utils";
 export default {
   Mutation: {
     createGuideProfile: protectedResolver(
-      async (_, { photos, personality, guideIntro }, { loggedInUser }) => {
+      async (_, { guidePhotos, personality, guideIntro }, { loggedInUser }) => {
         try {
           const guide = await db.guide.findUnique({
             where: {
@@ -18,25 +18,24 @@ export default {
             };
           }
 
-          const newGuideProfile = await db.guideProfile.create({
+          await db.guide.update({
+            where: {
+              id: guide.id,
+            },
             data: {
               personality,
               guideIntro,
-              guide: {
-                connect: {
-                  id: guide.id,
-                },
-              },
             },
           });
 
-          for (let photo of photos) {
+          for (let guidePhoto of guidePhotos) {
             await db.file.create({
               data: {
-                fileUrl: photo.url,
-                guideProfile: {
+                fileUrl: guidePhoto.url,
+                fileUrlOrder: guidePhoto.id,
+                guide: {
                   connect: {
-                    id: newGuideProfile.id,
+                    id: guide.id,
                   },
                 },
               },

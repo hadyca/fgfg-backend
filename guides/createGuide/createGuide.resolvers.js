@@ -12,7 +12,7 @@ export default {
           height,
           address,
           phone,
-          photo,
+          resumePhoto,
           selfIntro,
           language,
         },
@@ -38,7 +38,7 @@ export default {
               height,
               address,
               phone,
-              photo,
+              resumePhoto,
               selfIntro,
               language: JSON.stringify(language),
               user: {

@@ -1,14 +1,14 @@
 import { gql } from "graphql-tag";
 
 export default gql`
-  input PhotosInput {
+  input GuidePhotosInput {
     id: Int!
     url: String!
   }
 
   type Mutation {
     createGuideProfile(
-      photos: [PhotosInput!]!
+      guidePhotos: [GuidePhotosInput!]!
       personality: String!
       guideIntro: String!
     ): MutationResult!

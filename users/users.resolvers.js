@@ -1,5 +1,3 @@
-import db from "../db";
-
 export default {
   User: {
     isMe: ({ id }, _, { loggedInUser }) => {
