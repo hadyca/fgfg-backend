@@ -5,6 +5,7 @@ export default gql`
     id: Int!
     fullname: String!
     birthdate: String!
+    height: String!
     address: String!
     phone: String!
     resumePhoto: String!
@@ -14,7 +15,7 @@ export default gql`
     guideIntro: String
     isActive: Boolean
     selfIntro: String!
-    language: String!
+    language: String
     isApproved: Boolean!
     user: User!
     reservations: [Reservation]
