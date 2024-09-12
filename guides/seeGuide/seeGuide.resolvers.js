@@ -8,6 +8,7 @@ export default {
           where: { id: guideId },
           include: {
             guidePhotos: true,
+            reservations: true,
           },
         });
 
