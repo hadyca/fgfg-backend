@@ -6,12 +6,10 @@ export default {
   Query: {
     seeAvailableGuides: async (
       _,
-      { startTime: originalStartTime, endTime: originalEndTime }
+      { startTime: newStartTime, endTime: newEndTime }
     ) => {
       try {
-        let newEndTime = originalEndTime;
-
-        if (!originalStartTime || !newEndTime) {
+        if (!newStartTime || !newEndTime) {
           const guides = await db.guide.findMany({
             where: {
               isApproved: true,
@@ -24,23 +22,14 @@ export default {
           return guides;
         }
 
-        // newEndTime이 "T24:00:00.000Z" 형태인지 확인
-        if (newEndTime.toISOString().includes("T24:00:00.000Z")) {
-          const endDate = new Date(newEndTime);
-
-          // 하루를 더해주고 시간을 00:00으로 설정
-          endDate.setUTCDate(endDate.getUTCDate() + 1);
-          newEndTime = endDate.toISOString(); // 수정된 ISO 8601 형식으로 변환
-        }
-
         const existingReservation = await db.reservation.findMany({
           where: {
             OR: [
               {
                 // 새로운 예약의 시작 시간이 기존 예약의 시작과 종료 시간 사이에 있는 경우
                 AND: [
-                  { startTime: { lte: originalStartTime } },
-                  { endTime: { gt: originalStartTime } },
+                  { startTime: { lte: newStartTime } },
+                  { endTime: { gt: newStartTime } },
                 ],
               },
               {
@@ -53,7 +42,7 @@ export default {
               {
                 // 새로운 예약이 기존 예약을 완전히 포함하는 경우
                 AND: [
-                  { startTime: { gte: originalStartTime } },
+                  { startTime: { gte: newStartTime } },
                   { endTime: { lte: newEndTime } },
                 ],
               },
