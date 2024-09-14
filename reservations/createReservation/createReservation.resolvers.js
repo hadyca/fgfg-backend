@@ -1,7 +1,9 @@
 import db from "../../db";
 import { protectedResolver } from "../../users/users.utils";
+import { DateTimeResolver } from "graphql-scalars";
 
 export default {
+  DateTime: DateTimeResolver,
   Mutation: {
     createReservation: protectedResolver(
       async (
@@ -59,7 +61,7 @@ export default {
               error: "해당 시간은 예약이 안됩니다.",
             };
           }
-          const reservation = await db.reservation.create({
+          await db.reservation.create({
             data: {
               startTime: newStartTime,
               endTime: newEndTime,

@@ -7,15 +7,18 @@ export default {
         const guide = await db.guide.findUnique({
           where: { id: guideId },
           include: {
-            guidePhotos: true,
-            reservations: true,
+            guidePhotos: {
+              orderBy: {
+                fileUrlOrder: "asc",
+              },
+            },
+            reservations: {
+              orderBy: {
+                startTime: "asc",
+              },
+            },
           },
         });
-
-        // guidePhotos 배열을 fileUrlOrder 순서로 정렬
-        if (guide && guide.guidePhotos) {
-          guide.guidePhotos.sort((a, b) => a.fileUrlOrder - b.fileUrlOrder);
-        }
 
         return guide;
       } catch (error) {

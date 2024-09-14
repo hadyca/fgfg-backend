@@ -4,8 +4,8 @@ export default gql`
   type Mutation {
     createReservation(
       guideId: Int!
-      startTime: String!
-      endTime: String!
+      startTime: DateTime!
+      endTime: DateTime!
     ): MutationResult!
   }
 `;

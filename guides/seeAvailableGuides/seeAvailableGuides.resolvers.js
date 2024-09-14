@@ -1,6 +1,8 @@
 import db from "../../db";
+import { DateTimeResolver } from "graphql-scalars";
 
 export default {
+  DateTime: DateTimeResolver,
   Query: {
     seeAvailableGuides: async (
       _,
@@ -23,7 +25,7 @@ export default {
         }
 
         // newEndTime이 "T24:00:00.000Z" 형태인지 확인
-        if (newEndTime.includes("T24:00:00.000Z")) {
+        if (newEndTime.toISOString().includes("T24:00:00.000Z")) {
           const endDate = new Date(newEndTime);
 
           // 하루를 더해주고 시간을 00:00으로 설정
