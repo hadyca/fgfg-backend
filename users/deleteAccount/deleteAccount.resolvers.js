@@ -1,4 +1,4 @@
-import db from "../../db";
+import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -12,7 +12,7 @@ export default {
               error: "본인 계정이 아닙니다.",
             };
           }
-          const existingUser = await db.user.findUnique({
+          const existingUser = await client.user.findUnique({
             where: {
               id: userId,
             },
@@ -23,7 +23,7 @@ export default {
               error: "존재 하지 않는 계정 입니다.",
             };
           }
-          await db.user.delete({
+          await client.user.delete({
             where: {
               id: loggedInUser.id,
             },

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import db from "../../db";
+import client from "../../client";
 import { protectedResolver } from "../users.utils";
 
 export default {
@@ -12,7 +12,7 @@ export default {
       ) => {
         try {
           if (newUsername) {
-            const existingUsername = await db.user.findUnique({
+            const existingUsername = await client.user.findUnique({
               where: {
                 username: newUsername,
               },
@@ -30,7 +30,7 @@ export default {
           if (newPassword) {
             uglyPassword = await bcrypt.hash(newPassword, 10);
           }
-          await db.user.update({
+          await client.user.update({
             where: { id: loggedInUser.id },
             data: {
               ...(newUsername && { username: newUsername }),

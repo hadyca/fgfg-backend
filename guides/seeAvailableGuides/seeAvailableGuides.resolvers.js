@@ -1,4 +1,4 @@
-import db from "../../db";
+import client from "../../client";
 import { DateTimeResolver } from "graphql-scalars";
 
 export default {
@@ -10,7 +10,7 @@ export default {
     ) => {
       try {
         if (!newStartTime || !newEndTime) {
-          const guides = await db.guide.findMany({
+          const guides = await client.guide.findMany({
             where: {
               isApproved: true,
             },
@@ -22,7 +22,7 @@ export default {
           return guides;
         }
 
-        const existingReservation = await db.reservation.findMany({
+        const existingReservation = await client.reservation.findMany({
           where: {
             OR: [
               {
@@ -55,7 +55,7 @@ export default {
         });
 
         const guideIds = existingReservation.map((item) => item.guideId);
-        const guides = await db.guide.findMany({
+        const guides = await client.guide.findMany({
           where: {
             id: { notIn: guideIds }, // 중복 ID 제외
           },

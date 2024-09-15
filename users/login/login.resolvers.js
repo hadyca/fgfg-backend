@@ -1,12 +1,12 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import db from "../../db";
+import client from "../../client";
 
 export default {
   Mutation: {
     login: async (_, { email, password }) => {
       try {
-        const user = await db.user.findUnique({
+        const user = await client.user.findUnique({
           where: { email },
           include: {
             guide: true,
@@ -28,7 +28,7 @@ export default {
         }
 
         //승인된 가이드만 guideId 발급
-        const guide = await db.guide.findUnique({
+        const guide = await client.guide.findUnique({
           where: {
             userId: user.id,
             isApproved: true,

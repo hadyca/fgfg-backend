@@ -11,6 +11,10 @@ export default gql`
       guidePhotos: [GuidePhotosInput!]!
       personality: String!
       guideIntro: String!
+      pickupPlaceMain: String!
+      pickupPlaceDetail: String!
+      pickupPlaceLatitude: String!
+      pickupPlaceLongitude: String!
     ): MutationResult!
   }
 `;

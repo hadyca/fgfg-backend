@@ -1,4 +1,4 @@
-import db from "../../db";
+import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -6,7 +6,7 @@ export default {
     seeUserReservation: protectedResolver(
       async (_, { reservationId }, { loggedInUser }) => {
         try {
-          const reservation = await db.reservation.findUnique({
+          const reservation = await client.reservation.findUnique({
             where: {
               id: reservationId,
             },

@@ -1,4 +1,4 @@
-import db from "../../db";
+import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -21,7 +21,7 @@ export default {
         { loggedInUser }
       ) => {
         try {
-          const updatedGuide = await db.guide.update({
+          const updatedGuide = await client.guide.update({
             where: { userId: loggedInUser.id },
             data: {
               fullname,
@@ -37,7 +37,7 @@ export default {
           });
 
           // 기존 사진 가져오기
-          const existingPhotos = await db.file.findMany({
+          const existingPhotos = await client.file.findMany({
             where: {
               guideId: updatedGuide.id,
             },
@@ -61,13 +61,13 @@ export default {
 
           // 삭제할 사진 제거
           for (let photo of photosToDelete) {
-            await db.file.delete({
+            await client.file.delete({
               where: { id: photo.id },
             });
           }
           // 추가할 사진 생성
           for (let newPhoto of photosToAdd) {
-            await db.file.create({
+            await client.file.create({
               data: {
                 fileUrl: newPhoto.url,
                 guide: {

@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker"; // ESM 구문을 그대로 사용
-import db from "../db";
+import client from "../client";
 
 async function main() {
   for (let i = 0; i < 10; i++) {
-    await db.user.create({
+    await client.user.create({
       data: {
         username: faker.person.fullName(),
         email: faker.internet.email(),
@@ -11,7 +11,7 @@ async function main() {
         password: faker.internet.password(),
       },
     });
-    await db.guide.create({
+    await client.guide.create({
       data: {
         fullname: faker.person.fullName(),
         birthdate: "1990-04-25",
@@ -36,5 +36,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    await db.$disconnect();
+    await client.$disconnect();
   });

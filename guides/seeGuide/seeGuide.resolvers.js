@@ -1,10 +1,10 @@
-import db from "../../db";
+import client from "../../client";
 
 export default {
   Query: {
     seeGuide: async (_, { guideId }) => {
       try {
-        const guide = await db.guide.findUnique({
+        const guide = await client.guide.findUnique({
           where: { id: guideId },
           include: {
             guidePhotos: {

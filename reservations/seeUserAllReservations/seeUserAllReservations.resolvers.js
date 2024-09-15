@@ -1,4 +1,4 @@
-import db from "../../db";
+import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -6,7 +6,7 @@ export default {
     seeUserAllReservations: protectedResolver(
       async (_, __, { loggedInUser }) => {
         try {
-          const reservations = db.reservation.findMany({
+          const reservations = client.reservation.findMany({
             where: {
               userId: loggedInUser.id,
             },

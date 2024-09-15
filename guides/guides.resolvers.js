@@ -1,9 +1,9 @@
-import db from "../db";
+import client from "../client";
 
 export default {
   Guide: {
     mainGuidePhoto: ({ id }) => {
-      const file = db.file.findFirst({
+      const file = client.file.findFirst({
         where: {
           guideId: id,
           fileUrlOrder: 1,

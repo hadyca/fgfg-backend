@@ -14,31 +14,37 @@ model User {
   avatar       String?
   password     String
   guide        Guide?
-  Reservations Reservation[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-}
-
-model Guide {
-  id           Int           @id @default(autoincrement())
-  fullname     String
-  birthdate    String
-  height       String
-  address      String
-  phone        String
-  resumePhoto  String
-  guidePhotos  File[]
-  selfIntro    String
-  language     String? //추 후 postresql 변경 후, Json으로 교체
-  personality  String?
-  guideIntro   String?
-  isActive     Boolean       @default(true) //가이드용
-  isApproved   Boolean       @default(false) //운영자용
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       Int           @unique
   reservations Reservation[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+  reportGuides ReportGuide[]
+}
+
+model Guide {
+  id                   Int           @id @default(autoincrement())
+  fullname             String
+  birthdate            String
+  height               String
+  address              String
+  phone                String
+  resumePhoto          String
+  guidePhotos          File[]
+  selfIntro            String
+  language             String? //추 후 postresql 변경 후, Json으로 교체
+  personality          String?
+  guideIntro           String?
+  pickupPlaceMain      String?
+  pickupPlaceDetail    String?
+  pickupPlaceLatitude  String?
+  pickupPlaceLongitude String?
+  isActive             Boolean       @default(true) //가이드용
+  isApproved           Boolean       @default(false) //운영자용
+  user                 User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId               Int           @unique
+  reservations         Reservation[]
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  reportGuides         ReportGuide[]
 }
 
 model Reservation {
@@ -62,4 +68,15 @@ model File {
   guideId      Int
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model ReportGuide {
+  id        Int      @id @default(autoincrement())
+  fromUser  User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int?
+  toGuide   Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
+  guideId   Int
+  reason    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

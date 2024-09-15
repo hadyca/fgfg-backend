@@ -1,4 +1,4 @@
-import db from "../../db";
+import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -6,7 +6,7 @@ export default {
     confirmReservation: protectedResolver(
       async (_, { reservationId, guideConfirm }, { loggedInUser }) => {
         try {
-          const user = await db.user.findUnique({
+          const user = await client.user.findUnique({
             where: {
               id: loggedInUser.id,
             },
@@ -15,7 +15,7 @@ export default {
             },
           });
 
-          const reservation = await db.reservation.findFirst({
+          const reservation = await client.reservation.findFirst({
             where: {
               id: reservationId,
             },
@@ -28,7 +28,7 @@ export default {
             };
           }
           if (guideConfirm) {
-            await db.reservation.update({
+            await client.reservation.update({
               where: {
                 id: reservationId,
               },
@@ -40,7 +40,7 @@ export default {
               ok: true,
             };
           } else {
-            await db.reservation.delete({
+            await client.reservation.delete({
               where: {
                 id: reservationId,
               },

@@ -1,6 +1,6 @@
 require("dotenv").config();
 import bcrypt from "bcrypt";
-import db from "../../db";
+import client from "../../client";
 import jwt from "jsonwebtoken";
 
 export default {
@@ -9,7 +9,7 @@ export default {
       try {
         const uglyPassword = await bcrypt.hash(password, 10);
 
-        const user = await db.user.create({
+        const user = await client.user.create({
           data: {
             username,
             email,

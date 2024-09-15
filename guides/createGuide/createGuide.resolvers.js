@@ -1,4 +1,4 @@
-import db from "../../db";
+import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -19,7 +19,7 @@ export default {
         { loggedInUser }
       ) => {
         try {
-          const existingUser = await db.guide.findUnique({
+          const existingUser = await client.guide.findUnique({
             where: {
               userId: loggedInUser.id,
             },
@@ -31,7 +31,7 @@ export default {
             };
           }
 
-          await db.guide.create({
+          await client.guide.create({
             data: {
               fullname,
               birthdate,

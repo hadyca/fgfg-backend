@@ -1,4 +1,4 @@
-import db from "../../db";
+import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
 import { DateTimeResolver } from "graphql-scalars";
 
@@ -12,7 +12,7 @@ export default {
         { loggedInUser }
       ) => {
         try {
-          const guide = await db.guide.findUnique({
+          const guide = await client.guide.findUnique({
             where: {
               id: guideId,
             },
@@ -24,7 +24,7 @@ export default {
             };
           }
 
-          const existingReservation = await db.reservation.findFirst({
+          const existingReservation = await client.reservation.findFirst({
             where: {
               guideId,
               OR: [
@@ -61,7 +61,7 @@ export default {
               error: "해당 시간은 예약이 안됩니다.",
             };
           }
-          await db.reservation.create({
+          await client.reservation.create({
             data: {
               startTime: newStartTime,
               endTime: newEndTime,

@@ -1,10 +1,10 @@
-import db from "../../db";
+import client from "../../client";
 
 export default {
   Query: {
     checkEmail: async (_, { email }) => {
       try {
-        const user = await db.user.findUnique({
+        const user = await client.user.findUnique({
           where: {
             email,
           },

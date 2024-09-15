@@ -1,10 +1,10 @@
-import db from "../../db";
+import client from "../../client";
 
 export default {
   Query: {
     seeAllGuides: async () => {
       try {
-        const guides = await db.guide.findMany({
+        const guides = await client.guide.findMany({
           where: {
             isApproved: true,
           },
