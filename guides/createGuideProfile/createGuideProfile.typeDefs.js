@@ -12,9 +12,9 @@ export default gql`
       personality: String!
       guideIntro: String!
       pickupPlaceMain: String!
+      pickupPlaceLat: Float!
+      pickupPlaceLng: Float!
       pickupPlaceDetail: String!
-      pickupPlaceLatitude: String!
-      pickupPlaceLongitude: String!
     ): MutationResult!
   }
 `;

@@ -9,13 +9,17 @@ export default gql`
     address: String!
     phone: String!
     resumePhoto: String!
+    selfIntro: String!
     guidePhotos: [File]
     mainGuidePhoto: File
     personality: String
     guideIntro: String
-    isActive: Boolean
-    selfIntro: String!
     language: String
+    pickupPlaceMain: String
+    pickupPlaceLat: Float
+    pickupPlaceLng: Float
+    pickupPlaceDetail: String
+    isActive: Boolean
     isApproved: Boolean!
     user: User!
     reservations: [Reservation]

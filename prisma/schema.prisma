@@ -21,30 +21,30 @@ model User {
 }
 
 model Guide {
-  id                   Int           @id @default(autoincrement())
-  fullname             String
-  birthdate            String
-  height               String
-  address              String
-  phone                String
-  resumePhoto          String
-  guidePhotos          File[]
-  selfIntro            String
-  language             String? //추 후 postresql 변경 후, Json으로 교체
-  personality          String?
-  guideIntro           String?
-  pickupPlaceMain      String?
-  pickupPlaceDetail    String?
-  pickupPlaceLatitude  String?
-  pickupPlaceLongitude String?
-  isActive             Boolean       @default(true) //가이드용
-  isApproved           Boolean       @default(false) //운영자용
-  user                 User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId               Int           @unique
-  reservations         Reservation[]
-  createdAt            DateTime      @default(now())
-  updatedAt            DateTime      @updatedAt
-  reportGuides         ReportGuide[]
+  id                Int           @id @default(autoincrement())
+  fullname          String
+  birthdate         String
+  height            String
+  address           String
+  phone             String
+  resumePhoto       String
+  guidePhotos       File[]
+  selfIntro         String
+  language          String? //추 후 postresql 변경 후, Json으로 교체
+  personality       String?
+  guideIntro        String?
+  pickupPlaceMain   String?
+  pickupPlaceLat    Float?
+  pickupPlaceLng    Float?
+  pickupPlaceDetail String?
+  isActive          Boolean       @default(true) //가이드용
+  isApproved        Boolean       @default(false) //운영자용
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            Int           @unique
+  reservations      Reservation[]
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  reportGuides      ReportGuide[]
 }
 
 model Reservation {

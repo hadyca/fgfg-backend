@@ -11,9 +11,9 @@ export default {
           personality,
           guideIntro,
           pickupPlaceMain,
+          pickupPlaceLat,
+          pickupPlaceLng,
           pickupPlaceDetail,
-          pickupPlaceLatitude,
-          pickupPlaceLongitude,
         },
         { loggedInUser }
       ) => {
@@ -39,8 +39,8 @@ export default {
               guideIntro,
               pickupPlaceMain,
               pickupPlaceDetail,
-              pickupPlaceLatitude,
-              pickupPlaceLongitude,
+              pickupPlaceLat,
+              pickupPlaceLng,
             },
           });
 
