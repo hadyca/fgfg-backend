@@ -19,7 +19,6 @@ export default {
             },
           },
         });
-
         return guide;
       } catch (error) {
         return error;
