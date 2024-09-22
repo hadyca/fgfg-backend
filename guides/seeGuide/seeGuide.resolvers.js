@@ -17,6 +17,11 @@ export default {
                 startTime: "asc",
               },
             },
+            user: {
+              select: {
+                avatar: true,
+              },
+            },
           },
         });
         return guide;

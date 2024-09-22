@@ -3,8 +3,7 @@ import { gql } from "graphql-tag";
 export default gql`
   type ChatRoom {
     id: String!
-    user: User!
-    guide: Guide!
+    users: [User]!
     messages: [Message]!
     createdAt: String!
     updatedAt: String!
@@ -14,8 +13,7 @@ export default gql`
     id: Int!
     payload: String!
     chatRoom: ChatRoom!
-    user: User
-    guide: Guide
+    user: User!
     createdAt: String!
     updatedAt: String!
   }

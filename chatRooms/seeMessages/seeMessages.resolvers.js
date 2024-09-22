@@ -11,22 +11,12 @@ export default {
         select: {
           id: true,
           payload: true,
-          userId: true,
-          created_at: true,
+          createdAt: true,
           user: {
             select: {
+              id: true,
               avatar: true,
               username: true,
-            },
-          },
-          guide: {
-            select: {
-              fullname: true,
-              user: {
-                select: {
-                  avatar: true,
-                },
-              },
             },
           },
         },

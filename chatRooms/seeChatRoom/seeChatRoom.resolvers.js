@@ -4,14 +4,19 @@ import { protectedResolver } from "../../users/users.utils";
 export default {
   Query: {
     seeChatRoom: protectedResolver(
-      async (_, { chatRoomId, guideId }, { loggedInUser }) => {
+      async (_, { chatRoomId }, { loggedInUser }) => {
         const chatRoom = await client.chatRoom.findUnique({
           where: {
             id: chatRoomId,
           },
+          include: {
+            users: {
+              select: { id: true },
+            },
+          },
         });
         const canSee = Boolean(
-          chatRoom.guideId === guideId || chatRoom.userId === loggedInUser.id
+          chatRoom.users.find((user) => user.id === loggedInUser.id)
         );
         if (!canSee) {
           return;

@@ -6,6 +6,6 @@ export default gql`
   }
 
   type Mutation {
-    createChatRoom(guideId: Int!): createChatRoomResult!
+    createChatRoom(guideId: Int!, payload: String!): createChatRoomResult!
   }
 `;
