@@ -8,6 +8,7 @@ export default gql`
     email: String!
     guide: Guide
     isMe: Boolean!
+    chatRooms: [ChatRoom]
     createdAt: String!
     updatedAt: String!
   }

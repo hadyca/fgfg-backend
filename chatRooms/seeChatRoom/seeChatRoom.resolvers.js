@@ -15,6 +15,10 @@ export default {
             },
           },
         });
+        // chatRoom이 null인 경우 처리
+        if (!chatRoom) {
+          return;
+        }
         const canSee = Boolean(
           chatRoom.users.find((user) => user.id === loggedInUser.id)
         );

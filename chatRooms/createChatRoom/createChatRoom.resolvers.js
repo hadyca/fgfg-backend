@@ -39,6 +39,7 @@ export default {
             users: {
               connect: [{ id: loggedInUser.id }, { id: guide.userId }],
             },
+            guideUserId: guide.userId,
           },
         });
 

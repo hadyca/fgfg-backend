@@ -11,6 +11,14 @@ export default {
           },
           include: {
             guide: true,
+            chatRooms: {
+              include: {
+                users: true,
+                messages: {
+                  orderBy: { createdAt: "desc" },
+                },
+              },
+            },
           },
         });
 
