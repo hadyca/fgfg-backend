@@ -23,15 +23,15 @@ export default gql`
     isApproved: Boolean!
     user: User!
     reservations: [Reservation]
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type File {
     id: Int!
     fileUrl: String!
     fileUrlOrder: String!
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 `;

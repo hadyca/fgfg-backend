@@ -6,7 +6,7 @@ export default gql`
     avatar: String!
     usernameOrFullname: String!
     lastMessage: String!
-    createdAt: String!
+    createdAt: DateTime!
     isRead: Boolean!
   }
 

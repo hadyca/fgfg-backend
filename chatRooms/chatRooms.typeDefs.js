@@ -6,8 +6,8 @@ export default gql`
     users: [User]
     messages: [Message]
     guideUser: Int!
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type Message {
@@ -15,7 +15,7 @@ export default gql`
     payload: String!
     chatRoom: ChatRoom!
     user: User!
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 `;

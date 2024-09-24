@@ -19,7 +19,13 @@ export default {
             },
             user: {
               select: {
+                id: true,
                 avatar: true,
+                chatRooms: {
+                  select: {
+                    id: true,
+                  },
+                },
               },
             },
           },

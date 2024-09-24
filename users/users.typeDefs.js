@@ -9,7 +9,7 @@ export default gql`
     guide: Guide
     isMe: Boolean!
     chatRooms: [ChatRoom]
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 `;

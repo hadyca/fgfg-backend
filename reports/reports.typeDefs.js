@@ -6,6 +6,6 @@ export default gql`
     fromUser: User!
     toGuide: Guide!
     reason: String!
-    createdAt: String!
+    createdAt: DateTime!
   }
 `;
