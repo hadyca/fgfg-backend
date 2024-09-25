@@ -14,9 +14,6 @@ export default {
             chatRooms: {
               include: {
                 users: true,
-                messages: {
-                  orderBy: { createdAt: "desc" },
-                },
               },
             },
           },

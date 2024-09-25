@@ -40,6 +40,7 @@ export default {
       if (!user || !user.chatRooms) {
         return []; // 채팅방이 없을 경우 빈 배열 반환
       }
+
       const chatRoomsResult = user.chatRooms.map((chatRoom) => {
         const hasMessages = chatRoom.messages && chatRoom.messages.length > 0;
 
@@ -72,6 +73,7 @@ export default {
           isRead,
         };
       });
+
       // createdAt 기준으로 내림차순 정렬 (최신 메시지가 먼저 나오도록)
       chatRoomsResult.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
