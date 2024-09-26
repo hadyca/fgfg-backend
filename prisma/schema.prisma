@@ -95,9 +95,9 @@ model ChatRoom {
 model Message {
   id         Int      @id @default(autoincrement())
   payload    String
-  chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [id])
+  chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
   chatRoomId String
-  user       User     @relation(fields: [userId], references: [id])
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     Int
   isRead     Boolean  @default(false)
   createdAt  DateTime @default(now())

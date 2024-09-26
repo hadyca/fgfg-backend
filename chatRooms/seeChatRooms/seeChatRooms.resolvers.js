@@ -78,7 +78,6 @@ export default {
       chatRoomsResult.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
-
       return chatRoomsResult;
     }),
   },
