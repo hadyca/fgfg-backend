@@ -15,6 +15,7 @@ export default gql`
     id: Int!
     payload: String!
     chatRoom: ChatRoom!
+    isMyMessage: Boolean!
     user: User!
     createdAt: DateTime!
     updatedAt: DateTime!
