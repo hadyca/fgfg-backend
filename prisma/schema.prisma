@@ -50,13 +50,14 @@ model Guide {
 }
 
 model Reservation {
-  id           Int      @id @default(autoincrement())
+  id           Int      @unique
   guide        Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
   guideId      Int
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
   startTime    DateTime
   endTime      DateTime
+  serviceFee   Int
   guideConfirm Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt()

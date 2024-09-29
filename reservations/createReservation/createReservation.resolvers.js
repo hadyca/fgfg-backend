@@ -1,4 +1,5 @@
 import client from "../../client";
+import { HOUR_FEE } from "../../constants";
 import { protectedResolver } from "../../users/users.utils";
 import { DateTimeResolver } from "graphql-scalars";
 
@@ -61,10 +62,18 @@ export default {
               error: "해당 시간은 예약이 안됩니다.",
             };
           }
+          const timeDifference = newEndTime - newStartTime;
+          const hoursDifference = timeDifference / (1000 * 60 * 60);
+
+          const serviceFee = hoursDifference * HOUR_FEE;
+
+          const randomId = Math.floor(10000000 + Math.random() * 90000000);
           await client.reservation.create({
             data: {
+              id: randomId,
               startTime: newStartTime,
               endTime: newEndTime,
+              serviceFee,
               user: {
                 connect: {
                   id: loggedInUser.id,

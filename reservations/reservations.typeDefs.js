@@ -8,6 +8,7 @@ export default gql`
     startTime: DateTime!
     endTime: DateTime!
     guideConfirm: Boolean!
+    serviceFee: Int!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
