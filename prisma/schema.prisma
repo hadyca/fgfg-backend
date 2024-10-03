@@ -18,8 +18,8 @@ model User {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   reportGuides ReportGuide[]
-  chatRooms    ChatRoom[]
   messages     Message[]
+  chatRooms    ChatRoom[]
 }
 
 model Guide {
@@ -85,12 +85,15 @@ model ReportGuide {
 }
 
 model ChatRoom {
-  id          String    @id @default(cuid())
-  users       User[]
-  guideUserId Int
-  messages    Message[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt()
+  id                   String    @id @default(cuid())
+  users                User[]
+  normalUserId         Int
+  normalUserRejoinedAt DateTime?
+  guideUserId          Int
+  guideUserRejoinedAt  DateTime?
+  messages             Message[]
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt()
 }
 
 model Message {
