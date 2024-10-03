@@ -5,6 +5,7 @@ export default gql`
     id: String!
     users: [User]
     messages: [Message]
+    normalUserId: Int!
     guideUserId: Int!
     otherUserId: Int!
     createdAt: DateTime!

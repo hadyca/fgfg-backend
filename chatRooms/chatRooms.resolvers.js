@@ -9,12 +9,16 @@ export default {
         },
         select: {
           users: true,
+          normalUserId: true,
+          guideUserId: true,
         },
       });
-      const otherUser = chatRoom.users.find(
-        (user) => user.id !== loggedInUser.id
-      );
-      return otherUser.id;
+
+      const otherUserId =
+        loggedInUser.id === chatRoom.normalUserId
+          ? chatRoom.guideUserId
+          : chatRoom.normalUserId;
+      return otherUserId;
     },
   },
   Message: {

@@ -12,10 +12,11 @@ export default {
           },
         });
 
-        // 이미 존재하는 채팅방 확인
+        // 이미 존재하는 채팅방 확인 (여기문제)
         let chatRoom = await client.chatRoom.findFirst({
           where: {
             normalUserId: loggedInUser.id,
+            guideUserId: guide.id,
           },
           select: {
             id: true,
@@ -62,9 +63,7 @@ export default {
           },
         });
 
-        return {
-          id: chatRoom.id,
-        };
+        return chatRoom;
       }
     ),
   },
