@@ -12,7 +12,6 @@ export default {
           },
         });
 
-        // 이미 존재하는 채팅방 확인 (여기문제)
         let chatRoom = await client.chatRoom.findFirst({
           where: {
             normalUserId: loggedInUser.id,
@@ -20,11 +19,19 @@ export default {
           },
           select: {
             id: true,
+            users: {
+              select: {
+                id: true,
+              },
+            },
           },
         });
 
-        if (chatRoom) {
-          // 이미 존재하는 채팅방에 user 연결
+        const isUserInChatRoom =
+          chatRoom?.users?.some((user) => user.id === loggedInUser.id) ?? false;
+
+        if (chatRoom && !isUserInChatRoom) {
+          // 이미 존재하는 채팅방에 user 연결 및 재연결 시간 기록
           chatRoom = await client.chatRoom.update({
             where: {
               id: chatRoom.id,
@@ -33,11 +40,13 @@ export default {
               users: {
                 connect: { id: loggedInUser.id },
               },
+              normalUserRejoinedAt: new Date(),
             },
             select: { id: true },
           });
-        } else {
-          // 채팅방이 없으면 새로 생성
+        }
+
+        if (!chatRoom) {
           chatRoom = await client.chatRoom.create({
             data: {
               users: {

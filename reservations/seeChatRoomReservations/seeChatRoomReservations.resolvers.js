@@ -9,6 +9,7 @@ export default {
           id: chatRoomId,
         },
         select: {
+          normalUserId: true,
           guideUserId: true,
           users: {
             select: { id: true },
@@ -16,16 +17,11 @@ export default {
         },
       });
 
-      const filteredUser = chatRoom.users.filter(
-        (user) => user.id !== chatRoom.guideUserId
-      );
-      const userId = filteredUser.length > 0 ? filteredUser[0].id : null;
-
       const reservations = await client.reservation.findMany({
         where: {
           AND: [
             { guideId: chatRoom.guideUserId },
-            { userId },
+            { userId: chatRoom.normalUserId },
             { endTime: { gt: new Date() } },
           ],
         },
