@@ -46,7 +46,9 @@ export default {
           const hasMessages = chatRoom.messages && chatRoom.messages.length > 0;
 
           const lastMessage = hasMessages ? chatRoom.messages[0].payload : ""; // 메시지가 없을 때 기본 값 설정
-          const createdAt = hasMessages ? chatRoom.messages[0].createdAt : ""; // 메시지가 없을 때 빈 값 설정
+          const createdAt = hasMessages
+            ? chatRoom.messages[0].createdAt
+            : new Date().toISOString();
 
           const otherUserId =
             loggedInUser.id === chatRoom.normalUserId

@@ -11,6 +11,6 @@ export default gql`
   }
 
   type Query {
-    seeChatRooms: [SeeChatRoomsResult!]
+    seeChatRooms: [SeeChatRoomsResult]
   }
 `;
