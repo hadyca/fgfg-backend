@@ -6,8 +6,11 @@ export default gql`
     guideId: Int!
     userId: Int!
     startTime: DateTime!
+    guide: Guide!
     endTime: DateTime!
     guideConfirm: Boolean!
+    userCancel: Boolean!
+    guideCancel: Boolean!
     serviceFee: Int!
     createdAt: DateTime!
     updatedAt: DateTime!

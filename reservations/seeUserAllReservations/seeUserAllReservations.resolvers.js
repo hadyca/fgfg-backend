@@ -10,8 +10,11 @@ export default {
             where: {
               userId: loggedInUser.id,
             },
+            include: {
+              guide: true,
+            },
             orderBy: {
-              createdAt: "desc",
+              startTime: "asc",
             },
           });
           return reservations;

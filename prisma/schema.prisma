@@ -59,6 +59,8 @@ model Reservation {
   endTime      DateTime
   serviceFee   Int
   guideConfirm Boolean  @default(false)
+  userCancel   Boolean  @default(false)
+  guideCancel  Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt()
 }
