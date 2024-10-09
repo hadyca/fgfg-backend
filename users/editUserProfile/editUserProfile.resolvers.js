@@ -7,7 +7,12 @@ export default {
     editUserProfile: protectedResolver(
       async (
         _,
-        { username: newUsername, avatar, password: newPassword },
+        {
+          username: newUsername,
+          email: newEamil,
+          avatar: newAvatar,
+          password: newPassword,
+        },
         { loggedInUser }
       ) => {
         try {
@@ -26,6 +31,21 @@ export default {
             }
           }
 
+          if (newEamil) {
+            const existingEmail = await client.user.findUnique({
+              where: {
+                email: newEamil,
+              },
+            });
+
+            if (existingEmail) {
+              return {
+                ok: false,
+                error: "이메일이 중복됩니다.",
+              };
+            }
+          }
+
           let uglyPassword = null;
           if (newPassword) {
             uglyPassword = await bcrypt.hash(newPassword, 10);
@@ -34,9 +54,12 @@ export default {
             where: { id: loggedInUser.id },
             data: {
               ...(newUsername && { username: newUsername }),
+              ...(newEamil && { email: newEamil }),
               ...(uglyPassword && { password: uglyPassword }),
+              ...(newAvatar && { avatar: newAvatar }),
             },
           });
+
           return {
             ok: true,
           };

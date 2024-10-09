@@ -17,6 +17,14 @@ export default {
             error: "잘못된 사용자 입니다.",
           };
         }
+        const currentTime = new Date();
+
+        if (currentTime > reservation.startTime) {
+          return {
+            ok: false,
+            error: "예약 시작 시간 전에 취소 해야 합니다.",
+          };
+        }
         await client.reservation.update({
           where: {
             id: reservationId,
