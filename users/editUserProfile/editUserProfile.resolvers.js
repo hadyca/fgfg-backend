@@ -9,7 +9,7 @@ export default {
         _,
         {
           username: newUsername,
-          email: newEamil,
+          email: newEmail,
           avatar: newAvatar,
           password: newPassword,
         },
@@ -31,10 +31,10 @@ export default {
             }
           }
 
-          if (newEamil) {
+          if (newEmail) {
             const existingEmail = await client.user.findUnique({
               where: {
-                email: newEamil,
+                email: newEmail,
               },
             });
 
@@ -54,7 +54,7 @@ export default {
             where: { id: loggedInUser.id },
             data: {
               ...(newUsername && { username: newUsername }),
-              ...(newEamil && { email: newEamil }),
+              ...(newEmail && { email: newEmail }),
               ...(uglyPassword && { password: uglyPassword }),
               ...(newAvatar && { avatar: newAvatar }),
             },

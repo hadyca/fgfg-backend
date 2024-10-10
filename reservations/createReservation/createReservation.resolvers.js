@@ -13,6 +13,16 @@ export default {
         { loggedInUser }
       ) => {
         try {
+          const now = new Date();
+
+          // newStartTime 또는 newEndTime이 현재 시간보다 이전인지 확인
+          if (new Date(newStartTime) < now || new Date(newEndTime) < now) {
+            return {
+              ok: false,
+              error: "시작 시간과 종료 시간은 현재 시간보다 미래여야 합니다.",
+            };
+          }
+
           const guide = await client.guide.findUnique({
             where: {
               id: guideId,
@@ -25,7 +35,7 @@ export default {
             };
           }
 
-          const existingReservation = await client.reservation.findFirst({
+          const existingReservation = await client.reservation.findMany({
             where: {
               guideId,
               OR: [
@@ -54,14 +64,24 @@ export default {
             },
             select: {
               guideId: true,
+              userCancel: true,
+              guideCancel: true,
             },
           });
-          if (existingReservation) {
-            return {
-              ok: false,
-              error: "해당 시간은 예약이 안됩니다.",
-            };
+          if (existingReservation.length > 0) {
+            const hasActiveReservation = existingReservation.some(
+              (reservation) =>
+                !reservation.userCancel && !reservation.guideCancel
+            );
+
+            if (hasActiveReservation) {
+              return {
+                ok: false,
+                error: "이미 예약된 시간 입니다.",
+              };
+            }
           }
+
           const timeDifference = newEndTime - newStartTime;
           const hoursDifference = timeDifference / (1000 * 60 * 60);
 
