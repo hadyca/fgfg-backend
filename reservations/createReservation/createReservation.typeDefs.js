@@ -6,6 +6,7 @@ export default gql`
       guideId: Int!
       startTime: DateTime!
       endTime: DateTime!
+      customerAgeRange: String!
     ): MutationResult!
   }
 `;

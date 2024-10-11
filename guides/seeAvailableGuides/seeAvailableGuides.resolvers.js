@@ -63,7 +63,6 @@ export default {
             createdAt: "desc",
           },
         });
-
         return guides;
       } catch (error) {
         return error;

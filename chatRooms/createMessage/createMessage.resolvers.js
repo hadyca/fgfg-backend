@@ -26,7 +26,20 @@ export default {
             loggedInUser.id === chatRoom.normalUserId
               ? chatRoom.guideUserId
               : chatRoom.normalUserId;
-
+          const otherUser = await client.user.findUnique({
+            where: {
+              id: otherUserId,
+            },
+            select: {
+              id: true,
+            },
+          });
+          if (!otherUser) {
+            return {
+              ok: false,
+              error: "상대방은 탈퇴한 회원입니다.",
+            };
+          }
           // 업데이트할 필드 정의
           const updateData = {
             users: {
@@ -35,6 +48,7 @@ export default {
               },
             },
           };
+
           // otherUserId가 normalUserId면 normalUserRejoinedAt 업데이트
           if (otherUserId === chatRoom.normalUserId) {
             updateData["normalUserRejoinedAt"] = new Date();

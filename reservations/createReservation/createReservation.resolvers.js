@@ -9,7 +9,12 @@ export default {
     createReservation: protectedResolver(
       async (
         _,
-        { guideId, startTime: newStartTime, endTime: newEndTime },
+        {
+          guideId,
+          startTime: newStartTime,
+          endTime: newEndTime,
+          customerAgeRange,
+        },
         { loggedInUser }
       ) => {
         try {
@@ -94,6 +99,7 @@ export default {
               startTime: newStartTime,
               endTime: newEndTime,
               serviceFee,
+              customerAgeRange,
               user: {
                 connect: {
                   id: loggedInUser.id,

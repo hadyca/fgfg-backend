@@ -12,6 +12,7 @@ export default gql`
     userCancel: Boolean!
     guideCancel: Boolean!
     serviceFee: Int!
+    customerAgeRange: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }

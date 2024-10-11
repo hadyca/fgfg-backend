@@ -50,19 +50,20 @@ model Guide {
 }
 
 model Reservation {
-  id           Int      @unique
-  guide        Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
-  guideId      Int
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       Int
-  startTime    DateTime
-  endTime      DateTime
-  serviceFee   Int
-  guideConfirm Boolean  @default(false)
-  userCancel   Boolean  @default(false)
-  guideCancel  Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt()
+  id               Int      @unique
+  guide            Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
+  guideId          Int
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           Int
+  startTime        DateTime
+  endTime          DateTime
+  serviceFee       Int
+  customerAgeRange String
+  guideConfirm     Boolean  @default(false)
+  userCancel       Boolean  @default(false)
+  guideCancel      Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt()
 }
 
 model File {
@@ -73,6 +74,8 @@ model File {
   guideId      Int
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@unique([guideId, fileUrlOrder])
 }
 
 model ReportGuide {
