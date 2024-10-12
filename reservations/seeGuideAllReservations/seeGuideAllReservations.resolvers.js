@@ -11,13 +11,18 @@ export default {
               userId: loggedInUser.id,
             },
           });
-
+          if (!guide?.isApproved) {
+            return;
+          }
           const reservations = await client.reservation.findMany({
             where: {
               guideId: guide.id,
             },
+            include: {
+              user: true,
+            },
             orderBy: {
-              createdAt: "desc",
+              startTime: "asc",
             },
           });
           return reservations;

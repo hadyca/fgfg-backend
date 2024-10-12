@@ -4,6 +4,7 @@ export default gql`
   type Reservation {
     id: Int!
     guideId: Int!
+    user: User!
     userId: Int!
     startTime: DateTime!
     guide: Guide!
