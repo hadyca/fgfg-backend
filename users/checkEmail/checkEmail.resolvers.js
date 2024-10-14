@@ -9,12 +9,14 @@ export default {
             email,
           },
         });
+
         if (user) {
           return {
             ok: false,
             error: "중복된 이메일주소가 있습니다.",
           };
         }
+
         return {
           ok: true,
         };

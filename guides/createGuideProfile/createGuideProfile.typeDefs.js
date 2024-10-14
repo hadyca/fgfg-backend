@@ -2,8 +2,8 @@ import { gql } from "graphql-tag";
 
 export default gql`
   input GuidePhotosInput {
-    id: Int!
-    url: String!
+    fileUrlOrder: Int!
+    fileUrl: String!
   }
 
   type Mutation {

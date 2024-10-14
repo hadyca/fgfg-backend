@@ -47,8 +47,8 @@ export default {
           for (let guidePhoto of guidePhotos) {
             await client.file.create({
               data: {
-                fileUrl: guidePhoto.url,
-                fileUrlOrder: guidePhoto.id,
+                fileUrl: guidePhoto.fileUrl,
+                fileUrlOrder: guidePhoto.fileUrlOrder,
                 guide: {
                   connect: {
                     id: guide.id,

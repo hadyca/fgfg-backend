@@ -19,6 +19,7 @@ export default {
             error: "존재 하지 않는 이메일주소 입니다.",
           };
         }
+
         const passwordOk = await bcrypt.compare(password, user.password);
         if (!passwordOk) {
           return {

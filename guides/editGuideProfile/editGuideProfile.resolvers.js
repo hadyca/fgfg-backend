@@ -32,8 +32,7 @@ export default {
               ...(height && { height }),
               ...(address && { address }),
               ...(phone && { phone }),
-              ...(language && { language }),
-              ...(guidePhotos && { guidePhotos }),
+              ...(language && { language: JSON.stringify(language) }),
               ...(personality && { personality }),
               ...(guideIntro && { guideIntro }),
               ...(pickupPlaceMain && { pickupPlaceMain }),
@@ -44,50 +43,59 @@ export default {
           });
 
           if (guidePhotos) {
-            // 기존 사진 가져오기
+            // 1. 해당 가이드의 모든 기존 파일을 조회
             const existingPhotos = await client.file.findMany({
-              where: {
-                guideId: updatedGuide.id,
-              },
+              where: { guideId: updatedGuide.id },
             });
 
-            // 기존 파일의 URL과 새로 들어온 사진 URL을 비교
-            const existingPhotoUrls = existingPhotos.map(
-              (photo) => photo.fileUrl
+            // 2. 새로운 guidePhotos 배열에서 fileUrlOrder만 추출
+            const newFileUrlOrders = guidePhotos.map(
+              (photo) => photo.fileUrlOrder
             );
-            const newPhotoUrls = guidePhotos.map((photo) => photo.url);
 
-            // 삭제할 사진 추출
+            // 3. 기존 파일 중 새로운 데이터에 없는 항목을 삭제
             const photosToDelete = existingPhotos.filter(
-              (photo) => !newPhotoUrls.includes(photo.fileUrl)
+              (photo) => !newFileUrlOrders.includes(photo.fileUrlOrder)
             );
 
-            // 추가할 사진 추출
-            const photosToAdd = guidePhotos.filter(
-              (photo) => !existingPhotoUrls.includes(photo.url)
-            );
-
-            // 삭제할 사진 제거
             for (let photo of photosToDelete) {
               await client.file.delete({
                 where: { id: photo.id },
               });
             }
-            // 추가할 사진 생성
-            for (let newPhoto of photosToAdd) {
-              await client.file.create({
-                data: {
-                  fileUrl: newPhoto.url,
-                  guide: {
-                    connect: {
-                      id: updatedGuide.id,
-                    },
-                  },
+
+            for (let guidePhoto of guidePhotos) {
+              const existingPhoto = await client.file.findFirst({
+                where: {
+                  guideId: updatedGuide.id,
+                  fileUrlOrder: guidePhoto.fileUrlOrder,
                 },
               });
+
+              if (existingPhoto) {
+                await client.file.update({
+                  where: {
+                    id: existingPhoto.id,
+                  },
+                  data: {
+                    fileUrl: guidePhoto.fileUrl,
+                  },
+                });
+              } else {
+                await client.file.create({
+                  data: {
+                    fileUrl: guidePhoto.fileUrl,
+                    fileUrlOrder: guidePhoto.fileUrlOrder,
+                    guide: {
+                      connect: {
+                        id: updatedGuide.id,
+                      },
+                    },
+                  },
+                });
+              }
             }
           }
-
           return {
             ok: true,
           };
