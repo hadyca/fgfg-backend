@@ -14,6 +14,7 @@ export default {
           startTime: newStartTime,
           endTime: newEndTime,
           customerAgeRange,
+          paymentIntentId,
         },
         { loggedInUser }
       ) => {
@@ -100,6 +101,7 @@ export default {
               endTime: newEndTime,
               serviceFee,
               customerAgeRange,
+              paymentIntentId,
               user: {
                 connect: {
                   id: loggedInUser.id,

@@ -14,6 +14,7 @@ export default gql`
     guideCancel: Boolean!
     serviceFee: Int!
     customerAgeRange: String!
+    paymentIntentId: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }

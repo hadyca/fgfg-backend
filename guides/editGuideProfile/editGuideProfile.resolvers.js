@@ -1,4 +1,6 @@
 import client from "../../client";
+import deleteCloudflareImage from "../../lib/deleteCloudflareImage";
+import extractId from "../../lib/extractId";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -59,11 +61,12 @@ export default {
             );
 
             for (let photo of photosToDelete) {
-              await client.file.delete({
+              const deletedFile = await client.file.delete({
                 where: { id: photo.id },
               });
+              const cloudeImageId = extractId(deletedFile.fileUrl);
+              await deleteCloudflareImage(cloudeImageId);
             }
-
             for (let guidePhoto of guidePhotos) {
               const existingPhoto = await client.file.findFirst({
                 where: {
@@ -73,6 +76,9 @@ export default {
               });
 
               if (existingPhoto) {
+                const cloudeImageId = extractId(existingPhoto.fileUrl);
+                await deleteCloudflareImage(cloudeImageId);
+
                 await client.file.update({
                   where: {
                     id: existingPhoto.id,

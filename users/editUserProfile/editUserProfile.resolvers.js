@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import client from "../../client";
 import { protectedResolver } from "../users.utils";
+import extractId from "../../lib/extractId";
+import deleteCloudflareImage from "../../lib/deleteCloudflareImage";
 
 export default {
   Mutation: {
@@ -46,10 +48,23 @@ export default {
             }
           }
 
+          if (newAvatar) {
+            const user = await client.user.findUnique({
+              where: {
+                id: loggedInUser.id,
+              },
+            });
+            if (user.avatar) {
+              const cloudeImageId = extractId(user.avatar);
+              await deleteCloudflareImage(cloudeImageId);
+            }
+          }
+
           let uglyPassword = null;
           if (newPassword) {
             uglyPassword = await bcrypt.hash(newPassword, 10);
           }
+
           await client.user.update({
             where: { id: loggedInUser.id },
             data: {
@@ -64,7 +79,10 @@ export default {
             ok: true,
           };
         } catch (error) {
-          return error;
+          return {
+            ok: false,
+            error: "오류가 발생했습니다.",
+          };
         }
       }
     ),

@@ -59,6 +59,7 @@ model Reservation {
   endTime          DateTime
   serviceFee       Int
   customerAgeRange String
+  paymentIntentId  String
   guideConfirm     Boolean  @default(false)
   userCancel       Boolean  @default(false)
   guideCancel      Boolean  @default(false)

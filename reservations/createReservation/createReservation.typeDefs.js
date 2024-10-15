@@ -7,6 +7,7 @@ export default gql`
       startTime: DateTime!
       endTime: DateTime!
       customerAgeRange: String!
+      paymentIntentId: String!
     ): MutationResult!
   }
 `;
