@@ -41,6 +41,8 @@ model Guide {
   pickupPlaceDetail String?
   isActive          Boolean       @default(true) //가이드용
   isApproved        Boolean       @default(false) //운영자용
+  bankname          String?
+  bankAccount       String?
   user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            Int           @unique
   reservations      Reservation[]

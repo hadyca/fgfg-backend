@@ -34,10 +34,18 @@ export default {
               id: guideId,
             },
           });
+
           if (guide.userId === loggedInUser.id) {
             return {
               ok: false,
               error: "고객님과 가이드님이 동일합니다.",
+            };
+          }
+
+          if (!guide.isActive) {
+            return {
+              ok: false,
+              error: "휴업 중인 가이드는 예약이 불가능합니다.",
             };
           }
 

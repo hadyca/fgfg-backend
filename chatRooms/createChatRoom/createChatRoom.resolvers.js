@@ -12,10 +12,15 @@ export default {
           },
         });
 
+        if (!guide.isActive) {
+          console.log("현재 활동을 잠시 중단한 가이드 입니다.");
+          return;
+        }
+
         let chatRoom = await client.chatRoom.findFirst({
           where: {
             normalUserId: loggedInUser.id,
-            guideUserId: guide.id,
+            guideUserId: guide.userId,
           },
           select: {
             id: true,
@@ -71,7 +76,6 @@ export default {
             },
           },
         });
-
         return chatRoom;
       }
     ),

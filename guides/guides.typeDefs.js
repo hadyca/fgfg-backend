@@ -21,6 +21,8 @@ export default gql`
     pickupPlaceDetail: String
     isActive: Boolean
     isApproved: Boolean!
+    bankname: String
+    bankAccount: String
     user: User!
     reservations: [Reservation]
     createdAt: DateTime!

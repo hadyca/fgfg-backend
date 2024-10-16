@@ -22,6 +22,9 @@ export default {
           pickupPlaceLat,
           pickupPlaceLng,
           pickupPlaceDetail,
+          isActive,
+          bankname,
+          bankAccount,
         },
         { loggedInUser }
       ) => {
@@ -41,6 +44,9 @@ export default {
               ...(pickupPlaceLat && { pickupPlaceLat }),
               ...(pickupPlaceLng && { pickupPlaceLng }),
               ...(pickupPlaceDetail && { pickupPlaceDetail }),
+              ...(isActive !== undefined && { isActive }),
+              ...(bankname && { bankname }),
+              ...(bankAccount && { bankAccount }),
             },
           });
 

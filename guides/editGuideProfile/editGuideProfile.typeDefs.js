@@ -16,6 +16,9 @@ export default gql`
       pickupPlaceLat: Float
       pickupPlaceLng: Float
       pickupPlaceDetail: String
+      isActive: Boolean
+      bankname: String
+      bankAccount: String
     ): MutationResult!
   }
 `;
