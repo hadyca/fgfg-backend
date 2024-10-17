@@ -1,4 +1,5 @@
 import client from "../../client";
+import getExchangeRate from "../../lib/getExchangeRate";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -10,6 +11,7 @@ export default {
             id: reservationId,
           },
         });
+
         const guide = await client.guide.findUnique({
           where: {
             userId: loggedInUser.id,
@@ -50,6 +52,33 @@ export default {
             guideConfirm: true,
           },
         });
+
+        const vndRate = await getExchangeRate();
+        if (!vndRate) {
+          return {
+            ok: false,
+            error: "환율 정보를 가져올 수 없습니다.",
+          };
+        }
+
+        const calculateRevenue = (reservation.serviceFee / 2) * vndRate;
+
+        await client.revenue.create({
+          data: {
+            amount: calculateRevenue,
+            reservation: {
+              connect: {
+                id: reservationId,
+              },
+            },
+            guide: {
+              connect: {
+                id: guide.id,
+              },
+            },
+          },
+        });
+
         return {
           ok: true,
         };

@@ -3,7 +3,7 @@ import { protectedResolver } from "../../users/users.utils";
 
 export default {
   Query: {
-    seeGuideAllReservations: protectedResolver(
+    seeAllunTransferredRevenue: protectedResolver(
       async (_, __, { loggedInUser }) => {
         try {
           const guide = await client.guide.findUnique({
@@ -11,26 +11,24 @@ export default {
               userId: loggedInUser.id,
             },
           });
-          if (!guide?.isApproved) {
+
+          if (!guide) {
             return;
           }
-          const reservations = await client.reservation.findMany({
+          const revenues = await client.revenue.findMany({
             where: {
               guideId: guide.id,
+              isTransfer: false,
             },
             include: {
-              user: true,
+              reservation: {
+                select: {
+                  id: true,
+                },
+              },
             },
-            orderBy: [
-              {
-                guideConfirm: "asc", // guideConfirm이 false인 것이 먼저 나오게 설정
-              },
-              {
-                startTime: "asc", // guideConfirm이 같을 경우 startTime을 기준으로 오름차순 정렬
-              },
-            ],
           });
-          return reservations;
+          return revenues;
         } catch (error) {
           return error;
         }

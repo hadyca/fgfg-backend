@@ -1,6 +1,11 @@
 import { gql } from "graphql-tag";
 
 export default gql`
+  type OneMonthRevenue {
+    date: String!
+    amount: Int!
+  }
+
   type Guide {
     id: Int!
     fullname: String!
@@ -25,6 +30,13 @@ export default gql`
     bankAccount: String
     user: User!
     reservations: [Reservation]
+    revenue: [Revenue]
+    totalAmount: Int
+    totalunTransferredAmount: Int
+    totalReservations: Int
+    totalGuideTime: Int
+    oneMonthRevenue: [OneMonthRevenue]
+    totalThisMonthRevenue: Int
     createdAt: DateTime!
     updatedAt: DateTime!
   }

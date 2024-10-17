@@ -49,14 +49,15 @@ model Guide {
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
   reportGuides      ReportGuide[]
+  revenues          Revenue[]
 }
 
 model Reservation {
   id               Int      @unique
-  guide            Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
-  guideId          Int
-  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId           Int
+  guide            Guide?   @relation(fields: [guideId], references: [id], onDelete: SetNull)
+  guideId          Int?
+  user             User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId           Int?
   startTime        DateTime
   endTime          DateTime
   serviceFee       Int
@@ -67,6 +68,7 @@ model Reservation {
   guideCancel      Boolean  @default(false)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt()
+  revenue          Revenue?
 }
 
 model File {
@@ -114,4 +116,16 @@ model Message {
   isRead     Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt()
+}
+
+model Revenue {
+  id            Int          @id @default(autoincrement())
+  amount        Int
+  reservation   Reservation? @relation(fields: [reservationId], references: [id], onDelete: SetNull)
+  reservationId Int?         @unique
+  guide         Guide?       @relation(fields: [guideId], references: [id], onDelete: SetNull)
+  guideId       Int?
+  isTransfer    Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt()
 }
