@@ -38,7 +38,7 @@ export default {
           if (guide.userId === loggedInUser.id) {
             return {
               ok: false,
-              error: "고객님과 가이드님이 동일합니다.",
+              error: "본인 계정은 예약이 불가능합니다.",
             };
           }
 

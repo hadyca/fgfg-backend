@@ -32,7 +32,7 @@ export default {
 
       return totalAmount;
     },
-    totalunTransferredAmount: async (_, __, { loggedInUser }) => {
+    totalUnTransferredAmount: async (_, __, { loggedInUser }) => {
       const guide = await client.guide.findUnique({
         where: {
           userId: loggedInUser.id,
@@ -49,12 +49,12 @@ export default {
         },
       });
 
-      const totalunTransferredAmount = revenues.reduce(
+      const totalUnTransferredAmount = revenues.reduce(
         (acc, curr) => acc + curr.amount,
         0
       );
 
-      return totalunTransferredAmount;
+      return totalUnTransferredAmount;
     },
     totalReservations: async (_, __, { loggedInUser }) => {
       const guide = await client.guide.findUnique({

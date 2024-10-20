@@ -12,6 +12,11 @@ export default {
           },
         });
 
+        if (guide.userId === loggedInUser.id) {
+          console.log("본인 계정에게 메시지를 보낼 수 없습니다.");
+          return;
+        }
+
         if (!guide.isActive) {
           console.log("현재 활동을 잠시 중단한 가이드 입니다.");
           return;

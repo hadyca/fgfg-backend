@@ -32,7 +32,7 @@ export default gql`
     reservations: [Reservation]
     revenue: [Revenue]
     totalAmount: Int
-    totalunTransferredAmount: Int
+    totalUnTransferredAmount: Int
     totalReservations: Int
     totalGuideTime: Int
     oneMonthRevenue: [OneMonthRevenue]

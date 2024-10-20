@@ -34,12 +34,14 @@ export default {
               id: true,
             },
           });
+
           if (!otherUser) {
             return {
               ok: false,
               error: "상대방은 탈퇴한 회원입니다.",
             };
           }
+
           // 업데이트할 필드 정의
           const updateData = {
             users: {
