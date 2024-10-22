@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -32,7 +33,7 @@ model Guide {
   resumePhoto       String
   guidePhotos       File[]
   selfIntro         String
-  language          String? //추 후 postresql 변경 후, Json으로 교체
+  language          Json?
   personality       String?
   guideIntro        String?
   pickupPlaceMain   String?

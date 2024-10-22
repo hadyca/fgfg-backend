@@ -40,7 +40,7 @@ export default {
               phone,
               resumePhoto,
               selfIntro,
-              language: JSON.stringify(language),
+              language,
               user: {
                 connect: {
                   id: loggedInUser.id,

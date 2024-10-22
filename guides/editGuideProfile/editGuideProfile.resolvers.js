@@ -37,7 +37,7 @@ export default {
               ...(height && { height }),
               ...(address && { address }),
               ...(phone && { phone }),
-              ...(language && { language: JSON.stringify(language) }),
+              ...(language && { language }),
               ...(personality && { personality }),
               ...(guideIntro && { guideIntro }),
               ...(pickupPlaceMain && { pickupPlaceMain }),

@@ -1,9 +1,17 @@
 import { gql } from "graphql-tag";
 
 export default gql`
+  scalar JSON
+
   type OneMonthRevenue {
     date: String!
     amount: Int!
+  }
+
+  type Language {
+    id: Int!
+    language: String!
+    level: String!
   }
 
   type Guide {
@@ -19,7 +27,7 @@ export default gql`
     mainGuidePhoto: File
     personality: String
     guideIntro: String
-    language: String
+    language: [Language]
     pickupPlaceMain: String
     pickupPlaceLat: Float
     pickupPlaceLng: Float
