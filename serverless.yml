@@ -1,15 +1,35 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: fgfgglobal
 service: apollo-lambda
 provider:
   name: aws
   runtime: nodejs16.x
+  region: ap-northeast-2
   httpApi:
     cors: true
+
+package:
+  exclude:
+    - node_modules/**
+    - src/**
+    - README.md
+    - .git/**
+
+layers:
+  commonDependencies:
+    name: common-dependencies-layer
+    packagePath: lambda-layer.zip
+    compatibleRuntimes:
+      - nodejs16.x
+
 functions:
   graphql:
     # Make sure your file path is correct!
     # (e.g., if your file is in the root folder use server.graphqlHandler )
     # The format is: <FILENAME>.<HANDLER>
-    handler: src/server.graphqlHandler # highlight-line
+    handler: build/server.graphqlHandler # highlight-line
+    layers:
+      - { Ref: CommonDependenciesLambdaLayer }
     events:
       - httpApi:
           path: /

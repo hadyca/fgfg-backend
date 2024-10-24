@@ -30,6 +30,8 @@ export default {
           startTime: true,
           endTime: true,
           guideConfirm: true,
+          userCancel: true,
+          guideCancel: true,
         },
         orderBy: {
           startTime: "asc",
