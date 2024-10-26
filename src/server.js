@@ -10,9 +10,12 @@ const server = new ApolloServer({
   resolvers,
 });
 
+const PORT = process.env.PORT || 4000;
+
 const startServer = async () => {
   try {
     const { url } = await startStandaloneServer(server, {
+      listen: { port: PORT },
       context: async ({ req }) => {
         return {
           loggedInUser: await getUser(req.headers.token),
