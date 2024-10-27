@@ -14,7 +14,6 @@ export default {
           startTime: newStartTime,
           endTime: newEndTime,
           customerAgeRange,
-          paymentIntentId,
         },
         { loggedInUser }
       ) => {
@@ -102,14 +101,13 @@ export default {
           const serviceFee = hoursDifference * HOUR_FEE;
 
           const randomId = Math.floor(10000000 + Math.random() * 90000000);
-          await client.reservation.create({
+          const newReservation = await client.reservation.create({
             data: {
               id: randomId,
               startTime: newStartTime,
               endTime: newEndTime,
               serviceFee,
               customerAgeRange,
-              paymentIntentId,
               user: {
                 connect: {
                   id: loggedInUser.id,
@@ -124,6 +122,7 @@ export default {
           });
           return {
             ok: true,
+            reservation: newReservation,
           };
         } catch (error) {
           return error;

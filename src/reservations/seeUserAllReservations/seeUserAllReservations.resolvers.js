@@ -9,6 +9,7 @@ export default {
           const reservations = client.reservation.findMany({
             where: {
               userId: loggedInUser.id,
+              isDeposited: true,
             },
             include: {
               guide: true,

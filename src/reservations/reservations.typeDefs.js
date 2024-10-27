@@ -9,12 +9,12 @@ export default gql`
     startTime: DateTime!
     guide: Guide!
     endTime: DateTime!
+    isDeposited: Boolean!
     guideConfirm: Boolean!
     userCancel: Boolean!
     guideCancel: Boolean!
     serviceFee: Int!
     customerAgeRange: String!
-    paymentIntentId: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }

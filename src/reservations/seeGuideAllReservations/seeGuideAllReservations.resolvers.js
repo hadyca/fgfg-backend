@@ -17,6 +17,7 @@ export default {
           const reservations = await client.reservation.findMany({
             where: {
               guideId: guide.id,
+              isDeposited: true,
             },
             include: {
               user: true,

@@ -1,10 +1,13 @@
 import client from "../../client";
+import { sendEmail } from "../../lib/sendEmail";
 import { protectedResolver } from "../users.utils";
 
 export default {
   Query: {
     me: protectedResolver(async (_, __, { loggedInUser }) => {
       try {
+        await sendEmail("rlawpgud86@naver.com");
+
         const user = await client.user.findUnique({
           where: {
             id: loggedInUser.id,
