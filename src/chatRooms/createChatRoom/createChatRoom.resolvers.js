@@ -1,4 +1,5 @@
 import client from "../../client";
+import { sendChatRoomNotificationEmail } from "../../lib/sendEmail";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -9,6 +10,9 @@ export default {
         const guide = await client.guide.findUnique({
           where: {
             id: guideId,
+          },
+          include: {
+            user: true,
           },
         });
 
@@ -37,10 +41,13 @@ export default {
           },
         });
 
-        const isUserInChatRoom =
+        const isMeInChatRoom =
           chatRoom?.users?.some((user) => user.id === loggedInUser.id) ?? false;
 
-        if (chatRoom && !isUserInChatRoom) {
+        const isGuideInChatRoom =
+          chatRoom?.users?.some((user) => user.id === guide.user.id) ?? false;
+
+        if (chatRoom && !isMeInChatRoom) {
           // 이미 존재하는 채팅방에 user 연결 및 재연결 시간 기록
           chatRoom = await client.chatRoom.update({
             where: {
@@ -55,8 +62,37 @@ export default {
             select: { id: true },
           });
         }
+        if (chatRoom && !isGuideInChatRoom) {
+          // 이미 존재하는 채팅방에 user 연결 및 재연결 시간 기록
+          chatRoom = await client.chatRoom.update({
+            where: {
+              id: chatRoom.id,
+            },
+            data: {
+              users: {
+                connect: { id: guide.user.id },
+              },
+              guideUserRejoinedAt: new Date(),
+            },
+            select: { id: true },
+          });
+        }
 
         if (!chatRoom) {
+          const user = await client.user.findUnique({
+            where: {
+              id: loggedInUser.id,
+            },
+            select: {
+              username: true,
+            },
+          });
+          await sendChatRoomNotificationEmail(
+            guide.user.email,
+            guide.fullname,
+            user.username
+          );
+
           chatRoom = await client.chatRoom.create({
             data: {
               users: {

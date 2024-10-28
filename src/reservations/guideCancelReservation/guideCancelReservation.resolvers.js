@@ -1,4 +1,5 @@
 import client from "../../client";
+import { sendRejectionEmail } from "../../lib/sendEmail";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -35,14 +36,37 @@ export default {
           };
         }
 
-        await client.reservation.update({
+        const newReservation = await client.reservation.update({
           where: {
             id: reservationId,
           },
           data: {
             guideCancel: true,
           },
+          include: {
+            user: true,
+            guide: true,
+          },
         });
+
+        const mainGuidePhoto = await client.file.findFirst({
+          where: {
+            guideId: newReservation.guide.id,
+            fileUrlOrder: 1,
+          },
+          select: {
+            fileUrl: true,
+          },
+        });
+
+        await sendRejectionEmail(
+          newReservation.user.email,
+          mainGuidePhoto.fileUrl,
+          newReservation.guide.fullname,
+          newReservation.startTime,
+          newReservation.endTime,
+          newReservation.serviceFee
+        );
         return {
           ok: true,
         };
