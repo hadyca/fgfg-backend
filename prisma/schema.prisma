@@ -63,7 +63,6 @@ model Reservation {
   endTime          DateTime
   serviceFee       Int
   customerAgeRange String
-  // paymentIntentId  String
   isDeposited      Boolean  @default(false)
   guideConfirm     Boolean  @default(false)
   userCancel       Boolean  @default(false)
