@@ -48,7 +48,7 @@ CREATE TABLE "Reservation" (
     "endTime" TIMESTAMP(3) NOT NULL,
     "serviceFee" INTEGER NOT NULL,
     "customerAgeRange" TEXT NOT NULL,
-    "paymentIntentId" TEXT NOT NULL,
+    "isDeposited" BOOLEAN NOT NULL DEFAULT false,
     "guideConfirm" BOOLEAN NOT NULL DEFAULT false,
     "userCancel" BOOLEAN NOT NULL DEFAULT false,
     "guideCancel" BOOLEAN NOT NULL DEFAULT false,
