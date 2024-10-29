@@ -85,7 +85,6 @@ export default {
           guideConfirm: true,
         },
       });
-
       // 각 reservation의 startTime과 endTime을 사용하여 총 가이드 시간 계산
       const totalGuideTime = reservations.reduce((total, reservation) => {
         const startTime = new Date(reservation.startTime);
