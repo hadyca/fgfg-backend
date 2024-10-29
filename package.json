@@ -6,7 +6,7 @@
     "studio": "npx prisma studio",
     "dev": "nodemon --exec babel-node src/server",
     "migrate": "npx prisma migrate dev",
-    "build": "babel src --out-dir build",
+    "build": "prisma generate && prisma migrate deploy && babel src --out-dir build",
     "start": "prisma generate && prisma migrate deploy && npm run build && node build/server",
     "seed": "babel-node prisma/seed.js"
   },
