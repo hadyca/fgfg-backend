@@ -101,6 +101,7 @@ export default {
           const serviceFee = hoursDifference * HOUR_FEE;
 
           const randomId = Math.floor(10000000 + Math.random() * 90000000);
+
           const newReservation = await client.reservation.create({
             data: {
               id: randomId,
@@ -108,6 +109,8 @@ export default {
               endTime: newEndTime,
               serviceFee,
               customerAgeRange,
+              pickupPlaceMain: guide.pickupPlaceMain,
+              pickupPlaceDetail: guide.pickupPlaceDetail,
               user: {
                 connect: {
                   id: loggedInUser.id,

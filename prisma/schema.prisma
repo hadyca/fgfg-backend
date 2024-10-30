@@ -54,22 +54,24 @@ model Guide {
 }
 
 model Reservation {
-  id               Int      @unique
-  guide            Guide?   @relation(fields: [guideId], references: [id], onDelete: SetNull)
-  guideId          Int?
-  user             User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  userId           Int?
-  startTime        DateTime
-  endTime          DateTime
-  serviceFee       Int
-  customerAgeRange String
-  isDeposited      Boolean  @default(false)
-  guideConfirm     Boolean  @default(false)
-  userCancel       Boolean  @default(false)
-  guideCancel      Boolean  @default(false)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt()
-  revenue          Revenue?
+  id                Int      @unique
+  guide             Guide?   @relation(fields: [guideId], references: [id], onDelete: SetNull)
+  guideId           Int?
+  user              User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId            Int?
+  startTime         DateTime
+  endTime           DateTime
+  serviceFee        Int
+  customerAgeRange  String
+  pickupPlaceMain   String
+  pickupPlaceDetail String
+  isDeposited       Boolean  @default(false)
+  guideConfirm      Boolean  @default(false)
+  userCancel        Boolean  @default(false)
+  guideCancel       Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt()
+  revenue           Revenue?
 }
 
 model File {

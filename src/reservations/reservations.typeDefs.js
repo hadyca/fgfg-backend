@@ -15,6 +15,8 @@ export default gql`
     guideCancel: Boolean!
     serviceFee: Int!
     customerAgeRange: String!
+    pickupPlaceMain: String!
+    pickupPlaceDetail: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }

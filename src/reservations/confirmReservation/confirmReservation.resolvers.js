@@ -1,6 +1,7 @@
 import client from "../../client";
 import getExchangeRate from "../../lib/getExchangeRate";
-import { sendConfirmEmail, sendEmail } from "../../lib/sendEmail";
+import { sendConfirmEmail } from "../../lib/sendEmail";
+import { calculateAge } from "../../lib/utils";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -92,13 +93,19 @@ export default {
             fileUrl: true,
           },
         });
+        const guideAge = calculateAge(newReservation.guide.birthdate);
+
         await sendConfirmEmail(
           newReservation.user.email,
           mainGuidePhoto.fileUrl,
           newReservation.guide.fullname,
           newReservation.startTime,
           newReservation.endTime,
-          newReservation.serviceFee
+          newReservation.serviceFee,
+          newReservation.id,
+          newReservation.pickupPlaceMain,
+          newReservation.pickupPlaceDetail,
+          guideAge
         );
 
         return {
