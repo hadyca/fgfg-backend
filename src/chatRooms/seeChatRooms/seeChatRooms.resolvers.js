@@ -40,7 +40,6 @@ export default {
       if (!user || !user.chatRooms) {
         return []; // 채팅방이 없을 경우 빈 배열 반환
       }
-
       const chatRoomsResult = await Promise.all(
         user.chatRooms.map(async (chatRoom) => {
           const hasMessages = chatRoom.messages && chatRoom.messages.length > 0;
@@ -78,7 +77,7 @@ export default {
           }
 
           const hasUnreadMessage = chatRoom.messages.some(
-            (message) => message.userId === otherUser?.id && !message.isRead
+            (message) => message.userId === otherUserId && !message.isRead
           );
 
           const isRead = !hasUnreadMessage;

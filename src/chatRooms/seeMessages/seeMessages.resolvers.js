@@ -42,6 +42,9 @@ export default {
               },
             },
           },
+          orderBy: {
+            createdAt: "asc",
+          },
         });
 
         return messages;
