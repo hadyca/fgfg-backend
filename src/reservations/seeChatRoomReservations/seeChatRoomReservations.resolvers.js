@@ -23,15 +23,8 @@ export default {
             { guideId: chatRoom.guideUserId },
             { userId: chatRoom.normalUserId },
             { endTime: { gt: new Date() } },
+            { isDeposited: true },
           ],
-        },
-        select: {
-          id: true,
-          startTime: true,
-          endTime: true,
-          guideConfirm: true,
-          userCancel: true,
-          guideCancel: true,
         },
         orderBy: {
           startTime: "asc",
