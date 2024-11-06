@@ -4,6 +4,8 @@ import { protectedResolver } from "../../users/users.utils";
 export default {
   Query: {
     seeChatRooms: protectedResolver(async (_, __, { loggedInUser }) => {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       const user = await client.user.findUnique({
         where: {
           id: loggedInUser.id,

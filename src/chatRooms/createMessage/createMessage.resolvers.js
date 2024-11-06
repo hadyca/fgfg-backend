@@ -69,7 +69,7 @@ export default {
           });
         }
 
-        await client.message.create({
+        const message = await client.message.create({
           data: {
             payload,
             user: {
@@ -85,6 +85,7 @@ export default {
         });
         return {
           ok: true,
+          messageId: message.id,
         };
       }
     ),

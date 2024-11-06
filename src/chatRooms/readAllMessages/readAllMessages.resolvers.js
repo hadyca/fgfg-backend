@@ -3,9 +3,29 @@ import { protectedResolver } from "../../users/users.utils";
 
 export default {
   Mutation: {
-    updateIsRead: protectedResolver(
+    readAllMessages: protectedResolver(
       async (_, { chatRoomId }, { loggedInUser }) => {
-        // 1. 채팅방의 모든 메시지 중 현재 사용자가 아닌 메시지들을 업데이트
+        const chatRoom = await client.chatRoom.findUnique({
+          where: {
+            id: chatRoomId,
+          },
+          select: {
+            users: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        });
+        const isUserInChatRoom = chatRoom.users.some(
+          (user) => user.id === loggedInUser.id
+        );
+        if (!isUserInChatRoom) {
+          return {
+            ok: false,
+            error: "채팅방에 없는 사용자 입니다.",
+          };
+        }
         await client.message.updateMany({
           where: {
             chatRoomId,
@@ -18,7 +38,6 @@ export default {
             isRead: true, // isRead 값을 true로 업데이트
           },
         });
-
         return {
           ok: true,
         };
