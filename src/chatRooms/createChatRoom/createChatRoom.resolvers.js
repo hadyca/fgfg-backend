@@ -17,13 +17,17 @@ export default {
         });
 
         if (guide.userId === loggedInUser.id) {
-          console.log("본인 계정에게 메시지를 보낼 수 없습니다.");
-          return;
+          return {
+            ok: false,
+            error: "본인 계정에게 메시지를 보낼 수 없습니다.",
+          };
         }
 
         if (!guide.isActive) {
-          console.log("현재 활동을 잠시 중단한 가이드 입니다.");
-          return;
+          return {
+            ok: false,
+            error: "현재 활동을 잠시 중단한 가이드 입니다.",
+          };
         }
 
         let chatRoom = await client.chatRoom.findFirst({
@@ -106,7 +110,7 @@ export default {
         }
 
         // 메시지 생성
-        await client.message.create({
+        const message = await client.message.create({
           data: {
             payload,
             user: {
@@ -116,8 +120,15 @@ export default {
               connect: { id: chatRoom.id },
             },
           },
+          select: {
+            id: true,
+          },
         });
-        return chatRoom;
+        return {
+          ok: true,
+          messageId: message.id,
+          chatRoom,
+        };
       }
     ),
   },
