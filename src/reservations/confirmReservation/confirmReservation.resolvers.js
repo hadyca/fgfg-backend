@@ -46,6 +46,22 @@ export default {
           };
         }
 
+        const revenue = await client.revenue.findUnique({
+          where: {
+            reservationId,
+          },
+          select: {
+            id: true,
+          },
+        });
+
+        if (revenue) {
+          return {
+            ok: false,
+            error: "이미 수익 데이터가 존재 합니다.",
+          };
+        }
+
         const newReservation = await client.reservation.update({
           where: {
             id: reservationId,
