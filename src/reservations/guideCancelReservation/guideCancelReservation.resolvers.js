@@ -1,5 +1,6 @@
 import client from "../../client";
 import { sendRejectionEmail } from "../../lib/sendEmail";
+import { calculateAge } from "../../lib/utils";
 import { protectedResolver } from "../../users/users.utils";
 
 export default {
@@ -58,6 +59,7 @@ export default {
             fileUrl: true,
           },
         });
+        const guideAge = calculateAge(newReservation.guide.birthdate);
 
         await sendRejectionEmail(
           newReservation.user.email,
@@ -65,7 +67,11 @@ export default {
           newReservation.guide.fullname,
           newReservation.startTime,
           newReservation.endTime,
-          newReservation.serviceFee
+          newReservation.serviceFee,
+          newReservation.id,
+          newReservation.pickupPlaceMain,
+          newReservation.pickupPlaceDetail,
+          guideAge
         );
         return {
           ok: true,
