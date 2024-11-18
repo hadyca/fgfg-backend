@@ -41,6 +41,7 @@ export default {
               resumePhoto,
               selfIntro,
               language,
+              isApproved: true,
               user: {
                 connect: {
                   id: loggedInUser.id,
