@@ -111,7 +111,6 @@ export default {
               customerAgeRange,
               pickupPlaceMain: guide.pickupPlaceMain,
               pickupPlaceDetail: guide.pickupPlaceDetail,
-              isDeposit: true,
               user: {
                 connect: {
                   id: loggedInUser.id,
