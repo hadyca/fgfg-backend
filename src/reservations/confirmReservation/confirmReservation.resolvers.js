@@ -26,14 +26,14 @@ export default {
         if (guide.id !== reservation.guideId) {
           return {
             ok: false,
-            error: "잘못된 사용자 입니다.",
+            error: "Invalid user.",
           };
         }
 
         if (reservation.userCancel) {
           return {
             ok: false,
-            error: "이미 고객님이 예약을 취소하였습니다.",
+            error: "Customer has already cancelled the reservation.",
           };
         }
 
@@ -42,7 +42,7 @@ export default {
         if (currentTime > reservation.startTime) {
           return {
             ok: false,
-            error: "예약 시작 시간 전에 수락 해야 합니다.",
+            error: "Reservation must be accepted before the start time.",
           };
         }
 
@@ -58,7 +58,7 @@ export default {
         if (revenue) {
           return {
             ok: false,
-            error: "이미 수익 데이터가 존재 합니다.",
+            error: "Revenue data already exists.",
           };
         }
 
@@ -79,7 +79,7 @@ export default {
         if (!vndRate) {
           return {
             ok: false,
-            error: "환율 정보를 가져올 수 없습니다.",
+            error: "Unable to fetch exchange rate information.",
           };
         }
 

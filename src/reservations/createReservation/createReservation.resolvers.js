@@ -24,7 +24,7 @@ export default {
           if (new Date(newStartTime) < now || new Date(newEndTime) < now) {
             return {
               ok: false,
-              error: "시작 시간과 종료 시간은 현재 시간보다 미래여야 합니다.",
+              error: "Start time and end time must be in the future.",
             };
           }
 
@@ -37,14 +37,14 @@ export default {
           if (guide.userId === loggedInUser.id) {
             return {
               ok: false,
-              error: "본인 계정은 예약이 불가능합니다.",
+              error: "You cannot make a reservation for your own account.",
             };
           }
 
           if (!guide.isActive) {
             return {
               ok: false,
-              error: "휴업 중인 가이드는 예약이 불가능합니다.",
+              error: "Guides on break cannot make reservations.",
             };
           }
 
@@ -90,7 +90,7 @@ export default {
             if (hasActiveReservation) {
               return {
                 ok: false,
-                error: "이미 예약된 시간 입니다.",
+                error: "This time is already reserved.",
               };
             }
           }

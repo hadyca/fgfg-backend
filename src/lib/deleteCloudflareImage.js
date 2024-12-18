@@ -14,6 +14,8 @@ export default async function deleteCloudflareImage(imageId) {
 
   const result = await response.json();
   if (!result.success) {
-    throw new Error(`Cloudflare 이미지 삭제 실패: ${result.errors[0].message}`);
+    throw new Error(
+      `Failed to delete Cloudflare image: ${result.errors[0].message}`
+    );
   }
 }

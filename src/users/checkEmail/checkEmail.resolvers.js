@@ -13,7 +13,7 @@ export default {
         if (user) {
           return {
             ok: false,
-            error: "중복된 이메일주소가 있습니다.",
+            error: "There is a duplicate email address.",
           };
         }
 

@@ -31,7 +31,7 @@ export const protectedResolver =
       } else {
         return {
           ok: false,
-          error: "로그인 해주세요.",
+          error: "Please log in.",
         };
       }
     }

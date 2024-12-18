@@ -15,7 +15,7 @@ export default {
         if (!guide) {
           return {
             ok: false,
-            error: "존재 하지 않는 가이드 입니다.",
+            error: "Guide does not exist.",
           };
         }
         await client.reportGuide.create({
@@ -41,7 +41,7 @@ export default {
       } catch (error) {
         return {
           ok: false,
-          error: "가이드 신고에 실패했습니다.",
+          error: "Failed to report guide.",
         };
       }
     },

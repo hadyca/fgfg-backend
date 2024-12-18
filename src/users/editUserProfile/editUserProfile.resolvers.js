@@ -28,7 +28,7 @@ export default {
             if (existingUsername) {
               return {
                 ok: false,
-                error: "유저네임이 중복됩니다.",
+                error: "Username already exists.",
               };
             }
           }
@@ -43,7 +43,7 @@ export default {
             if (existingEmail) {
               return {
                 ok: false,
-                error: "이메일이 중복됩니다.",
+                error: "Email already exists.",
               };
             }
           }
@@ -81,7 +81,7 @@ export default {
         } catch (error) {
           return {
             ok: false,
-            error: "오류가 발생했습니다.",
+            error: "An error occurred.",
           };
         }
       }

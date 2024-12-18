@@ -16,7 +16,7 @@ export default {
         if (!user) {
           return {
             ok: false,
-            error: "존재 하지 않는 이메일주소 입니다.",
+            error: "Email address does not exist.",
           };
         }
 
@@ -24,7 +24,7 @@ export default {
         if (!passwordOk) {
           return {
             ok: false,
-            error: "비밀번호가 틀렸습니다.",
+            error: "Incorrect password.",
           };
         }
 

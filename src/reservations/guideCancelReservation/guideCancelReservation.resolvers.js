@@ -25,7 +25,7 @@ export default {
         if (guide.id !== reservation.guideId) {
           return {
             ok: false,
-            error: "잘못된 사용자 입니다.",
+            error: "Invalid user.",
           };
         }
         const currentTime = new Date();
@@ -33,7 +33,7 @@ export default {
         if (currentTime > reservation.startTime) {
           return {
             ok: false,
-            error: "예약 시작 시간 전에 취소 해야 합니다.",
+            error: "Reservation must be cancelled before the start time.",
           };
         }
 

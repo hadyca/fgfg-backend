@@ -23,7 +23,7 @@ export default {
         if (!isUserInChatRoom) {
           return {
             ok: false,
-            error: "없는 채팅방이거나, 해당 유저가 없습니다.",
+            error: "Chat room does not exist or user is not a member.",
           };
         }
 

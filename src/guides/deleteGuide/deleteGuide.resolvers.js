@@ -17,7 +17,7 @@ export default {
       } catch (error) {
         return {
           ok: false,
-          error: "오류가 발생했습니다.",
+          error: "An error has occurred.",
         };
       }
     }),

@@ -38,7 +38,7 @@ export default {
           if (!otherUser) {
             return {
               ok: false,
-              error: "상대방은 탈퇴한 회원입니다.",
+              error: "The other user has left the service.",
             };
           }
 

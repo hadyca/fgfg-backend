@@ -27,7 +27,7 @@ export default {
           if (existingUser) {
             return {
               ok: false,
-              error: "이미 가입된 유저 입니다.",
+              error: "User is already registered.",
             };
           }
 
@@ -56,7 +56,7 @@ export default {
         } catch (error) {
           return {
             ok: false,
-            error: "오류가 발생했습니다.",
+            error: "An error has occurred.",
           };
         }
       }

@@ -19,14 +19,14 @@ export default {
         if (guide.userId === loggedInUser.id) {
           return {
             ok: false,
-            error: "본인 계정에게 메시지를 보낼 수 없습니다.",
+            error: "You cannot send a message to your own account.",
           };
         }
 
         if (!guide.isActive) {
           return {
             ok: false,
-            error: "현재 활동을 잠시 중단한 가이드 입니다.",
+            error: "This guide is currently inactive.",
           };
         }
 

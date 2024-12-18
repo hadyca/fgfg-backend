@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import client from "../../client";
 
 export default {
@@ -13,14 +12,14 @@ export default {
         if (!user) {
           return {
             ok: false,
-            error: "존재 하지 않는 유저 입니다.",
+            error: "User does not exist.",
           };
         }
         const passwordOk = await bcrypt.compare(password, user.password);
         if (!passwordOk) {
           return {
             ok: false,
-            error: "비밀번호가 틀렸습니다.",
+            error: "Incorrect password.",
           };
         }
         return {

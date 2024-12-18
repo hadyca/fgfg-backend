@@ -20,7 +20,7 @@ export default {
         });
 
         if (!user) {
-          throw new Error("본인 계정이 아닙니다.");
+          throw new Error("This is not your account.");
         } else {
           return user;
         }

@@ -12,7 +12,7 @@ export default {
         if (user) {
           return {
             ok: false,
-            error: "중복된 유저명이 있습니다.",
+            error: "There is a duplicate username.",
           };
         }
         return {

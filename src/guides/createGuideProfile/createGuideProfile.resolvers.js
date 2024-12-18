@@ -26,7 +26,7 @@ export default {
           if (!guide) {
             return {
               ok: false,
-              error: "가이드가 아닙니다.",
+              error: "You are not a guide.",
             };
           }
 
@@ -64,7 +64,7 @@ export default {
         } catch (error) {
           return {
             ok: false,
-            error: "오류가 발생했습니다.",
+            error: "An error has occurred.",
           };
         }
       }

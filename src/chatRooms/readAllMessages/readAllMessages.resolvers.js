@@ -23,7 +23,7 @@ export default {
         if (!isUserInChatRoom) {
           return {
             ok: false,
-            error: "채팅방에 없는 사용자 입니다.",
+            error: "User is not in the chat room.",
           };
         }
         await client.message.updateMany({

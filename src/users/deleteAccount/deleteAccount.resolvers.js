@@ -12,7 +12,7 @@ export default {
       if (!existingUser) {
         return {
           ok: false,
-          error: "존재 하지 않는 계정 입니다.",
+          error: "The account does not exist.",
         };
       }
       await client.user.delete({

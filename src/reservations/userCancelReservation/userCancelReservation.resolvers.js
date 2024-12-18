@@ -14,14 +14,14 @@ export default {
         if (loggedInUser.id !== reservation.userId) {
           return {
             ok: false,
-            error: "잘못된 사용자 입니다.",
+            error: "Invalid user.",
           };
         }
 
         if (reservation.guideConfirm) {
           return {
             ok: false,
-            error: "이미 가이드가 예약을 수락하였습니다.",
+            error: "This reservation has already been confirmed by the guide.",
           };
         }
 
@@ -30,7 +30,7 @@ export default {
         if (currentTime > reservation.startTime) {
           return {
             ok: false,
-            error: "예약 시작 시간 전에 취소 해야 합니다.",
+            error: "You must cancel the reservation before the start time.",
           };
         }
         await client.reservation.update({
