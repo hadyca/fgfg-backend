@@ -65,7 +65,7 @@ model Reservation {
   customerAgeRange  String
   pickupPlaceMain   String
   pickupPlaceDetail String
-  isDeposited       Boolean  @default(true)
+  isDeposited       Boolean  @default(false)
   guideConfirm      Boolean  @default(false)
   userCancel        Boolean  @default(false)
   guideCancel       Boolean  @default(false)
