@@ -6,7 +6,7 @@ export default {
     seeUserAllReservations: protectedResolver(
       async (_, __, { loggedInUser }) => {
         try {
-          const reservations = client.reservation.findMany({
+          const reservations = await client.reservation.findMany({
             where: {
               userId: loggedInUser.id,
               isDeposited: true,
@@ -18,7 +18,11 @@ export default {
               startTime: "asc",
             },
           });
-          return reservations;
+          const filteredReservations = reservations.filter(
+            (reservation) => reservation.guide !== null
+          );
+
+          return filteredReservations;
         } catch (error) {
           return error;
         }

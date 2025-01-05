@@ -31,7 +31,12 @@ export default {
               },
             ],
           });
-          return reservations;
+          // user가 null이 아닌 예약만 필터링
+          const filteredReservations = reservations.filter(
+            (reservation) => reservation.user !== null
+          );
+
+          return filteredReservations;
         } catch (error) {
           return error;
         }

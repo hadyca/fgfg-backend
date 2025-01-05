@@ -16,7 +16,6 @@ export default {
           },
         },
       });
-
       const reservations = await client.reservation.findMany({
         where: {
           AND: [
