@@ -82,7 +82,7 @@ export const sendConfirmEmail = async (
       </div>
 
       <div style="margin-top: 30px; text-align: center;">
-        <a href="https://fgfg.com" style="background-color: #F97316; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">FGFG로 이동하기</a>
+        <a href="https://fgfgglobal.com" style="background-color: #F97316; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">FGFG로 이동하기</a>
       </div>
 
       <p style="font-size: 0.8em; color: #888; text-align: center; margin-top: 20px;">
@@ -208,7 +208,7 @@ export const sendChatRoomNotificationEmail = async (
         <p>Nếu có bất kỳ thắc mắc nào về đặt chỗ, vui lòng liên hệ với chúng tôi qua ID Kakao: rlawpgud.</p>
         <p>Email này chỉ được gửi khi khách hàng gửi tin nhắn đầu tiên.</p>
         <div style="margin-top: 30px; text-align: center;">
-          <a href="https://fgfg.com/chat" style="background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Truy cập FGFG</a>
+          <a href="https://fgfgglobal.com" style="background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Truy cập FGFG</a>
         </div>
   
         <p style="font-size: 0.9em; color: #888; text-align: center; margin-top: 20px;">
