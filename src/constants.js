@@ -1,1 +1,1 @@
-export const HOUR_FEE = 20000;
+export const HOUR_FEE = 15000;
