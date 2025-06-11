@@ -91,6 +91,7 @@ export default {
               username: true,
             },
           });
+
           await sendChatRoomNotificationEmail(
             guide.user.email,
             guide.fullname,

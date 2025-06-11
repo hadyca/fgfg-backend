@@ -213,7 +213,7 @@ export const sendChatRoomNotificationEmail = async (
   
         <p style="font-size: 0.9em; color: #888; text-align: center; margin-top: 20px;">
           Đây là email tự động được gửi từ FGFG.<br>
-          © FGFG 2024. Bản quyền thuộc về FGFG.
+          © FGFG 2025. Bản quyền thuộc về FGFG.
         </p>
       </div>
     `,
