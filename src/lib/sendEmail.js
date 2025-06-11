@@ -86,7 +86,7 @@ export const sendConfirmEmail = async (
       </div>
 
       <p style="font-size: 0.8em; color: #888; text-align: center; margin-top: 20px;">
-        이 메일은 FGFG에서 자동 발송된 메일입니다.<br>© FGFG 2024. All rights reserved.
+        이 메일은 FGFG에서 자동 발송된 메일입니다.<br>© FGFG 2025. All rights reserved.
       </p>
     </div>
   `,
@@ -176,7 +176,7 @@ export const sendRejectionEmail = async (
       </div>
 
       <p style="font-size: 0.8em; color: #888; text-align: center; margin-top: 20px;">
-        이 메일은 FGFG에서 자동 발송된 메일입니다.<br>© FGFG 2024. All rights reserved.
+        이 메일은 FGFG에서 자동 발송된 메일입니다.<br>© FGFG 2025. All rights reserved.
       </p>
     </div>
   `,
@@ -204,7 +204,7 @@ export const sendChatRoomNotificationEmail = async (
       <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: auto; border: 1px solid #eaeaea; padding: 20px; border-radius: 8px;">
         <h1 style="color: #4CAF50; text-align: center;">Phòng chat mới đã được tạo!</h1>
         <p style="font-size: 1.2em;">Xin chào, ${fullname}!</p>
-        <p>FGFG đã tạo một phòng chat mới để bạn trao đổi với khách hàng ${username}. Xin hãy kiểm tra tin nhắn!</p>
+        <p>${username} đã tạo một phòng chat mới để bạn trao đổi với khách hàng. Xin hãy kiểm tra tin nhắn!</p>
         <p>Nếu có bất kỳ thắc mắc nào về đặt chỗ, vui lòng liên hệ với chúng tôi qua ID Kakao: rlawpgud.</p>
         <p>Email này chỉ được gửi khi khách hàng gửi tin nhắn đầu tiên.</p>
         <div style="margin-top: 30px; text-align: center;">
